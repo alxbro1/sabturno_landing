@@ -28,9 +28,9 @@ type CtaHighlight = {
 }
 
 const heroBenefits = [
+  'Registro 100% gratis para locales y clientes',
   'Agenda inteligente y centralizada',
   'Recordatorios automáticos al cliente',
-  'Datos accionables para cada servicio',
 ]
 
 const stats: Stat[] = [
@@ -100,63 +100,65 @@ const workflow: WorkflowStep[] = [
 
 const ctaHighlights: CtaHighlight[] = [
   {
-    title: 'Onboarding acompañado',
-    detail: 'Un especialista Sabturno migra tu agenda y entrena al equipo en vivo.',
+    title: 'Registro gratuito',
+    detail: 'Crea tu cuenta en minutos, sin tarjeta ni contrato mínimo.',
   },
   {
     title: 'Soporte en español',
-    detail: 'Slack y WhatsApp para dueñxs y managers sin bots impersonales.',
+    detail: 'Acompañamiento por chat y correo para que nadie se quede trabado.',
   },
   {
     title: 'Actualizaciones continuas',
-    detail: 'Lanzamos mejoras cada sprint con roadmap abierto a tu feedback.',
+    detail: 'Lanzamos mejoras frecuentes teniendo en cuenta el feedback de la comunidad.',
   },
+]
+
+const sampleServices = [
+  { name: 'Corte', time: '10:15', location: 'Sucursal Palermo' },
+  { name: 'Color + Brushing', time: '11:45', location: 'Sucursal Centro' },
+  { name: 'Hidratación', time: '13:15', location: 'Sucursal Recoleta' },
 ]
 </script>
 
 <template>
-  <div class="bg-brand-sand text-brand-ink">
+  <div class="bg-brand-night text-brand-ink">
     <header class="mx-auto flex max-w-6xl items-center justify-between px-4 py-6 lg:px-0">
-      <div class="flex items-center gap-3">
-        <div class="h-11 w-11 rounded-2xl bg-brand-night/90 text-center text-lg font-semibold text-white shadow-glow">
-          ST
-        </div>
-        <div>
-          <p class="text-xs uppercase tracking-[0.4em] text-brand-night/70">sabturno</p>
-          <p class="text-sm text-brand-night/60">turnos sin fricción</p>
-        </div>
+      <div class="flex">
+        <img src="/white_logotype.webp" alt="Logo Sabturno" class="h-16">
       </div>
-      <nav class="hidden gap-6 text-sm font-medium text-brand-night/70 md:flex">
-        <a href="#features">Funciones</a>
-        <a href="#workflow">Cómo funciona</a>
-        <a href="#contact">Contacto</a>
+      <nav class="hidden items-center gap-6 text-sm font-medium text-brand-ink/70 md:flex">
+        <a href="#features" class="hover:text-brand-neon transition">Funciones</a>
+        <a href="#workflow" class="hover:text-brand-neon transition">Cómo funciona</a>
+        <a href="#contact" class="hover:text-brand-neon transition">Contacto</a>
+        <a href="/terminos-y-condiciones.html" class="text-xs underline underline-offset-4 hover:text-brand-neon transition">Términos y condiciones</a>
+        <a href="/politica-de-privacidad.html" class="text-xs underline underline-offset-4 hover:text-brand-neon transition">Política de privacidad</a>
       </nav>
-      <button class="hidden rounded-full bg-brand-night px-5 py-2 text-sm font-semibold text-white shadow-card transition hover:bg-brand-coral md:block">
-        Solicitar demo
+      <button class="hidden rounded-full bg-brand-neon px-5 py-2 text-sm font-semibold text-brand-night shadow-card transition hover:bg-brand-neon/80 md:block">
+        Descargar Ahora
       </button>
     </header>
 
-    <main class="mx-auto max-w-6xl space-y-24 px-4 pb-24 lg:px-0">
+    <main class="mx-auto max-w-6xl space-y-24 p-4 pb-24 lg:px-0">
       <section id="hero" class="glass-panel relative mt-4 overflow-hidden">
         <div class="absolute inset-0 bg-grid-soft opacity-40"></div>
         <div class="relative grid gap-10 lg:grid-cols-[1.05fr,0.95fr]">
-          <div class="space-y-8">
+          <div class="space-y-8 p-4">
             <span class="badge">Locales + Clientes en un mismo pulso</span>
             <div class="space-y-4">
-              <h1 class="text-4xl font-semibold text-brand-night sm:text-5xl">
-                Turnos y operaciones para salones que quieren crecer sin caos
+              <h1 class="text-4xl font-semibold text-brand-ink sm:text-5xl">
+                La forma más simple de gestionar tus turnos, totalmente gratis
               </h1>
-              <p class="text-lg text-brand-night/70">
-                Sabturno conecta barberías, peluquerías y centros de estética con su comunidad. Automatizá la agenda,
-                alineá al equipo y sorprende con experiencias memorables.
+              <p class="text-lg text-brand-ink/70">
+                Sabturno conecta barberías, peluquerías y centros de estética con su comunidad. Cualquier persona puede
+                registrarse gratis, reservar y gestionar turnos sin llamadas ni chats eternos.
               </p>
             </div>
             <div class="flex flex-wrap gap-3">
-              <button class="rounded-full bg-brand-coral px-6 py-3 text-sm font-semibold text-white shadow-card transition hover:-translate-y-0.5 hover:bg-brand-night">
-                Agendar llamada
+              <button class="rounded-full bg-brand-neon px-6 py-3 text-sm font-semibold text-brand-night shadow-card transition hover:-translate-y-0.5 hover:bg-brand-neon/80">
+                Descargar Ahora
               </button>
-              <button class="rounded-full border border-brand-night/15 bg-white/70 px-6 py-3 text-sm font-semibold text-brand-night transition hover:-translate-y-0.5">
-                Ver caso de uso
+              <button class="rounded-full border border-brand-neon/40 bg-brand-muted/70 px-6 py-3 text-sm font-semibold text-brand-ink transition hover:-translate-y-0.5 hover:border-brand-neon">
+                Ver cómo funciona
               </button>
             </div>
             <ul class="flex flex-wrap gap-3">
@@ -166,22 +168,22 @@ const ctaHighlights: CtaHighlight[] = [
             </ul>
           </div>
           <div class="hero-card">
-            <div class="mb-6 flex items-center justify-between text-sm text-brand-night/60">
+            <div class="mb-6 flex items-center justify-between text-sm text-brand-ink/60">
               <span>Agenda Hoy</span>
               <span>Sabturno OS</span>
             </div>
             <div class="space-y-4">
-              <div v-for="slot in 3" :key="slot" class="rounded-2xl border border-brand-night/10 bg-white/90 px-4 py-3 shadow-card">
+              <div v-for="service in sampleServices" :key="service.name" class="rounded-2xl border border-brand-neon/20 bg-brand-muted/90 px-4 py-3 shadow-card">
                 <div class="flex items-center justify-between text-sm">
-                  <p class="font-semibold text-brand-night">Color + Brushing</p>
-                  <span class="text-brand-night/60">{{ 10 + slot }}:{{ slot % 2 ? '15' : '45' }} hs</span>
+                  <p class="font-semibold text-brand-ink">{{ service.name }}</p>
+                  <span class="text-brand-ink/60">{{ service.time }} hs</span>
                 </div>
-                <p class="text-xs text-brand-night/60">Cliente confirmado · Sucursal Palermo</p>
+                <p class="text-xs text-brand-ink/60">Cliente confirmado · {{ service.location }}</p>
               </div>
               <div class="mt-8 grid gap-4 sm:grid-cols-3">
-                <div v-for="metric in stats" :key="metric.label" class="rounded-2xl border border-brand-night/10 bg-white/90 px-4 py-3 text-center">
-                  <p class="text-2xl font-semibold text-brand-night">{{ metric.value }}</p>
-                  <p class="text-xs text-brand-night/60">{{ metric.label }}</p>
+                <div v-for="metric in stats" :key="metric.label" class="rounded-2xl border border-brand-neon/20 bg-brand-muted/90 px-4 py-3 text-center">
+                  <p class="text-2xl font-semibold text-brand-neon">{{ metric.value }}</p>
+                  <p class="text-xs text-brand-ink/60">{{ metric.label }}</p>
                 </div>
               </div>
             </div>
@@ -192,88 +194,102 @@ const ctaHighlights: CtaHighlight[] = [
       <section id="features" class="space-y-12">
         <div class="mx-auto max-w-3xl text-center">
           <p class="badge">Diseñado para ambos lados del mostrador</p>
-          <h2 class="mt-6 text-4xl font-semibold">Una sola plataforma para coordinar servicios, comunidad y negocio</h2>
-          <p class="mt-4 text-base text-brand-night/70">
+          <h2 class="mt-6 text-4xl font-semibold text-brand-ink">Una sola plataforma para coordinar servicios, comunidad y negocio</h2>
+          <p class="mt-4 text-base text-brand-ink/70">
             Estandarizá procesos sin perder el toque humano: workflows claros para managers y una app amable para tus clientes fieles.
           </p>
         </div>
         <div class="grid gap-6 md:grid-cols-2">
-          <article v-for="column in featureColumns" :key="column.title" class="glass-panel h-full">
+          <article v-for="column in featureColumns" :key="column.title" class="glass-panel h-full p-4">
             <header class="mb-6 flex items-center justify-between">
               <div>
-                <p class="text-sm uppercase tracking-wide text-brand-night/60">{{ column.focus }}</p>
-                <h3 class="text-2xl font-semibold text-brand-night">{{ column.title }}</h3>
+                <p class="text-sm uppercase tracking-wide text-brand-ink/60">{{ column.focus }}</p>
+                <h3 class="text-2xl font-semibold text-brand-ink">{{ column.title }}</h3>
               </div>
-              <span class="rounded-full border border-brand-night/10 px-3 py-1 text-xs font-semibold text-brand-night/70">
+              <span class="rounded-full border border-brand-neon/30 bg-brand-neon/10 px-3 py-1 text-xs font-semibold text-brand-neon">
                 {{ column.tagline }}
               </span>
             </header>
             <ul class="space-y-5">
-              <li v-for="item in column.items" :key="item.title" class="rounded-2xl border border-brand-night/10 bg-white/80 px-4 py-4">
-                <h4 class="text-lg font-semibold text-brand-night">{{ item.title }}</h4>
-                <p class="mt-1 text-sm text-brand-night/70">{{ item.description }}</p>
+              <li v-for="item in column.items" :key="item.title" class="rounded-2xl border border-brand-neon/20 bg-brand-muted/80 px-4 py-4">
+                <h4 class="text-lg font-semibold text-brand-ink">{{ item.title }}</h4>
+                <p class="mt-1 text-sm text-brand-ink/70">{{ item.description }}</p>
               </li>
             </ul>
           </article>
         </div>
       </section>
 
-      <section id="workflow" class="glass-panel space-y-10">
+      <section id="workflow" class="glass-panel space-y-10 p-4">
         <div class="space-y-3">
           <p class="badge">Implementación express</p>
           <div class="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <h2 class="text-3xl font-semibold text-brand-night">Tu operación lista en tres hitos claros</h2>
-              <p class="text-base text-brand-night/70">Sin hojas de cálculo ni llamadas eternas: todo vive en Sabturno.</p>
+              <h2 class="text-3xl font-semibold text-brand-ink">Tu operación lista en tres hitos claros</h2>
+              <p class="text-base text-brand-ink/70">Sin hojas de cálculo ni llamadas eternas: todo vive en Sabturno.</p>
             </div>
-            <div class="text-sm text-brand-night/60">Tiempo promedio de puesta en marcha: 5 días</div>
+            <div class="text-sm text-brand-ink/60">Tiempo promedio de puesta en marcha: 5 días</div>
           </div>
         </div>
         <ol class="grid gap-6 md:grid-cols-3">
-          <li v-for="(step, index) in workflow" :key="step.title" class="rounded-3xl border border-brand-night/10 bg-white/80 p-5">
-            <span class="text-xs font-semibold uppercase tracking-[0.3em] text-brand-night/40">0{{ index + 1 }}</span>
-            <h3 class="mt-4 text-xl font-semibold text-brand-night">{{ step.title }}</h3>
-            <p class="mt-2 text-sm text-brand-night/70">{{ step.description }}</p>
-            <p class="mt-4 text-sm font-semibold text-brand-coral">{{ step.result }}</p>
+          <li v-for="(step, index) in workflow" :key="step.title" class="rounded-3xl border border-brand-neon/20 bg-brand-muted/80 p-5">
+            <span class="text-xs font-semibold uppercase tracking-[0.3em] text-brand-ink/40">0{{ index + 1 }}</span>
+            <h3 class="mt-4 text-xl font-semibold text-brand-ink">{{ step.title }}</h3>
+            <p class="mt-2 text-sm text-brand-ink/70">{{ step.description }}</p>
+            <p class="mt-4 text-sm font-semibold text-brand-neon">{{ step.result }}</p>
           </li>
         </ol>
       </section>
 
       <section id="contact" class="glass-panel">
         <div class="grid gap-10 lg:grid-cols-[1.1fr,0.9fr]">
-          <div class="space-y-4">
-            <p class="badge">Crezcamos juntos</p>
-            <h2 class="text-3xl font-semibold text-brand-night">Agenda una demo personalizada de Sabturno</h2>
-            <p class="text-base text-brand-night/70">
-              Entendemos las horas pico, las cancelaciones de último minuto y la necesidad de mantener motivado al equipo. Mostranos tu operación y
-              armamos una implementación a medida.
+          <div class="space-y-4 p-4">
+            <p class="badge">Empieza hoy mismo</p>
+            <h2 class="text-3xl font-semibold text-brand-ink">Crea tu cuenta gratuita en Sabturno</h2>
+            <p class="text-base text-brand-ink/70">
+              Entendemos las horas pico, las cancelaciones de último minuto y la necesidad de mantener motivado al equipo. Registrate sin costo y
+              empezá a ordenar tu día a día desde la app.
             </p>
             <div class="grid gap-4 sm:grid-cols-3">
-              <div v-for="stat in stats" :key="stat.label" class="rounded-2xl border border-brand-night/10 bg-white/90 px-4 py-3 text-center">
-                <p class="text-xl font-semibold text-brand-night">{{ stat.value }}</p>
-                <p class="text-xs text-brand-night/60">{{ stat.label }}</p>
+              <div v-for="stat in stats" :key="stat.label" class="rounded-2xl border border-brand-neon/20 bg-brand-muted/90 px-4 py-3 text-center">
+                <p class="text-xl font-semibold text-brand-neon">{{ stat.value }}</p>
+                <p class="text-xs text-brand-ink/60">{{ stat.label }}</p>
               </div>
             </div>
           </div>
-          <div class="rounded-3xl border border-brand-night/10 bg-white/90 p-6 shadow-card">
+          <div class="rounded-3xl border border-brand-neon/20 bg-brand-muted/90 p-6 shadow-card">
             <div class="space-y-5">
-              <div class="rounded-2xl border border-brand-night/10 bg-brand-cloud/50 p-4">
-                <p class="text-sm font-semibold text-brand-night">Disponible</p>
-                <p class="text-2xl font-semibold text-brand-night">Agenda Demo</p>
-                <p class="text-sm text-brand-night/70">Seleccioná un horario y recibí acceso a la app piloto.</p>
+              <div class="rounded-2xl border border-brand-neon/30 bg-brand-neon/10 p-4">
+                <p class="text-sm font-semibold text-brand-neon">Disponible</p>
+                <p class="text-2xl font-semibold text-brand-ink">Crea tu cuenta</p>
+                <p class="text-sm text-brand-ink/70">Registrate gratis y empezá a usar Sabturno en minutos.</p>
               </div>
               <ul class="space-y-4">
-                <li v-for="highlight in ctaHighlights" :key="highlight.title" class="rounded-2xl border border-brand-night/10 bg-white px-4 py-3">
-                  <p class="text-sm font-semibold text-brand-night">{{ highlight.title }}</p>
-                  <p class="text-sm text-brand-night/60">{{ highlight.detail }}</p>
+                <li v-for="highlight in ctaHighlights" :key="highlight.title" class="rounded-2xl border border-brand-neon/20 bg-brand-card px-4 py-3">
+                  <p class="text-sm font-semibold text-brand-ink">{{ highlight.title }}</p>
+                  <p class="text-sm text-brand-ink/60">{{ highlight.detail }}</p>
                 </li>
               </ul>
-              <button class="w-full rounded-full bg-brand-night py-3 text-sm font-semibold text-white transition hover:bg-brand-coral">Hablar con Sabturno</button>
-              <p class="text-center text-xs text-brand-night/60">Respuesta en menos de 24 hs · hola@sabturno.com</p>
+              <button class="w-full rounded-full bg-brand-neon py-3 text-sm font-semibold text-brand-night transition hover:bg-brand-neon/80">
+                Crear cuenta gratis
+              </button>
+              <p class="text-center text-xs text-brand-ink/60">
+                Al continuar aceptás nuestros
+                <a href="/terminos-y-condiciones.html" class="underline underline-offset-2 hover:text-brand-neon transition">Términos y Condiciones</a>.
+              </p>
             </div>
           </div>
         </div>
       </section>
     </main>
+    <footer class="border-t border-brand-neon/20 bg-brand-card/80">
+      <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 py-4 text-xs text-brand-ink/60 sm:flex-row lg:px-0">
+        <p>© {{ new Date().getFullYear() }} Sabturno. Todos los derechos reservados.</p>
+        <div class="flex flex-wrap items-center gap-4">
+          <a href="/terminos-y-condiciones.html" class="underline underline-offset-2 hover:text-brand-neon transition">Términos y Condiciones</a>
+          <a href="/politica-de-privacidad.html" class="underline underline-offset-2 hover:text-brand-neon transition">Política de Privacidad</a>
+        </div>
+      </div>
+    </footer>
   </div>
 </template>

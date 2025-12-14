@@ -5,12 +5,13 @@ export default {
     extend: {
       colors: {
         brand: {
-          ink: '#0b1c34',
-          night: '#111f3c',
-          coral: '#ff6b4a',
-          teal: '#34c6ba',
-          sand: '#fef9f4',
-          cloud: '#f4f2fc',
+          // Paleta oscura con verde neón
+          ink: '#ffffff', // texto principal sobre fondos oscuros
+          night: '#0a0a0a', // fondo principal oscuro
+          neon: '#00f068', // verde neón para CTAs y acentos - rgb(0, 240, 104)
+          muted: '#1a1a1a', // fondo secundario oscuro
+          card: '#141414', // tarjetas y paneles oscuros
+          border: '#2a2a2a', // bordes sutiles
         },
       },
       fontFamily: {
@@ -18,8 +19,8 @@ export default {
         body: ['Manrope', 'sans-serif'],
       },
       boxShadow: {
-        glow: '0 20px 70px rgba(13, 27, 52, 0.18)',
-        card: '0 12px 40px rgba(15, 23, 42, 0.12)',
+        glow: '0 26px 80px rgba(15, 23, 42, 0.28)',
+        card: '0 14px 45px rgba(15, 23, 42, 0.16)',
       },
       borderRadius: {
         fluid: '36px',
