@@ -122,8 +122,11 @@ const sampleServices = [
 ]
 import { ref, onMounted } from 'vue'
 import PasswordReset from '../components/PasswordReset.vue'
+import PreRegisterModal from '../components/PreRegisterModal.vue'
 
 const activeTab = ref<'main' | 'reset'>('main')
+const isPreRegisterOpen = ref(false)
+const showPreRegisterNotice = ref(false)
 const tokenInput = ref('')
 const tokenExpiresInput = ref('')
 const sampleToken = 'demo-reset-token-abc123'
@@ -131,6 +134,14 @@ const sampleExpires = new Date(Date.now() + 1000 * 60 * 30).toISOString()
 
 function handleResetSuccess() {
   alert('Contraseña reseteada (simulado)')
+}
+
+function openPreRegister() {
+  isPreRegisterOpen.value = true
+}
+
+function handlePreRegisterSuccess() {
+  showPreRegisterNotice.value = true
 }
 
 onMounted(() => {
@@ -148,6 +159,26 @@ onMounted(() => {
 
 <template>
   <div class="bg-brand-night text-brand-ink">
+    <PreRegisterModal
+      :open="isPreRegisterOpen"
+      @close="isPreRegisterOpen = false"
+      @success="handlePreRegisterSuccess"
+    />
+
+    <div v-if="showPreRegisterNotice" class="mx-auto max-w-6xl px-4 pt-4 lg:px-0">
+      <div class="flex items-start justify-between gap-4 rounded-3xl border border-brand-neon/20 bg-brand-muted/90 p-4 shadow-card">
+        <p class="text-sm text-brand-ink/70">
+          Pre-registro enviado. Esto puede demorar hasta 24 hs en llegarte por correo (o confirmación).
+        </p>
+        <button
+          type="button"
+          class="rounded-full border border-brand-neon/30 bg-brand-card px-3 py-1 text-xs font-semibold text-brand-ink/70 transition hover:text-brand-neon"
+          @click="showPreRegisterNotice = false"
+        >
+          Cerrar
+        </button>
+      </div>
+    </div>
     <header class="mx-auto flex max-w-6xl items-center justify-between px-4 py-6 lg:px-0">
       <div class="flex">
         <img src="/white_logotype.webp" alt="Logo Sabturno" class="h-16">
@@ -159,7 +190,10 @@ onMounted(() => {
         <RouterLink to="/terminos-y-condiciones" class="text-xs underline underline-offset-4 hover:text-brand-neon transition">Términos y condiciones</RouterLink>
         <RouterLink to="/politica-de-privacidad" class="text-xs underline underline-offset-4 hover:text-brand-neon transition">Política de privacidad</RouterLink>
       </nav>
-      <button class="hidden rounded-full bg-brand-neon px-5 py-2 text-sm font-semibold text-brand-night shadow-card transition hover:bg-brand-neon/80 md:block">
+      <button 
+        class="hidden rounded-full bg-brand-neon px-5 py-2 text-sm font-semibold text-brand-night shadow-card transition hover:bg-brand-neon/80 md:block"
+        @click="openPreRegister"
+      >
         Descargar Ahora
       </button>
     </header>
@@ -185,7 +219,10 @@ onMounted(() => {
                   </p>
                 </div>
                 <div class="flex flex-wrap gap-3">
-                  <button class="rounded-full bg-brand-neon px-6 py-3 text-sm font-semibold text-brand-night shadow-card transition hover:-translate-y-0.5 hover:bg-brand-neon/80">
+                  <button 
+                  class="rounded-full bg-brand-neon px-6 py-3 text-sm font-semibold text-brand-night shadow-card transition hover:-translate-y-0.5 hover:bg-brand-neon/80"
+                  @click="openPreRegister"
+                >
                     Descargar Ahora
                   </button>
                   <button class="rounded-full border border-brand-neon/40 bg-brand-muted/70 px-6 py-3 text-sm font-semibold text-brand-ink transition hover:-translate-y-0.5 hover:border-brand-neon">
@@ -301,7 +338,11 @@ onMounted(() => {
                       <p class="text-sm text-brand-ink/60">{{ highlight.detail }}</p>
                     </li>
                   </ul>
-                  <button class="w-full rounded-full bg-brand-neon py-3 text-sm font-semibold text-brand-night transition hover:bg-brand-neon/80">
+                  <button
+                    type="button"
+                    class="w-full rounded-full bg-brand-neon py-3 text-sm font-semibold text-brand-night transition hover:bg-brand-neon/80"
+                    @click="openPreRegister"
+                  >
                     Crear cuenta gratis
                   </button>
                   <p class="text-center text-xs text-brand-ink/60">
