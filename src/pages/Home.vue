@@ -181,7 +181,7 @@ onMounted(() => {
     </div>
     <header class="mx-auto flex max-w-6xl items-center justify-between px-4 py-6 lg:px-0">
       <div class="flex">
-        <img src="/white_logotype.webp" alt="Logo Sabturno" class="h-16">
+        <img src="/white_logotype.webp" alt="Logo Sabturno" class="h-14">
       </div>
       <nav class="hidden items-center gap-6 text-sm font-medium text-brand-ink/70 md:flex">
         <a href="#features" class="hover:text-brand-neon transition">Funciones</a>
