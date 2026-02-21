@@ -49,7 +49,7 @@ const featureColumns: FeatureColumn[] = [
     items: [
       {
         title: 'Agenda compartida',
-        description: 'Sincronizá barberxs, estilistas y cabinas en una sola vista con permisos personalizados.',
+        description: 'Sincronizá barbers, estilistas y cabinas en una sola vista con permisos personalizados.',
       },
       {
         title: 'Cobranzas claras',
