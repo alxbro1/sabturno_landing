@@ -11,7 +11,7 @@ const supportEmail = 'alesauro30@gmail.com'
     <div class="mx-auto max-w-4xl px-4 py-10">
       <div class="mb-6 flex items-start justify-between gap-4">
         <div>
-          <p class="badge">{{ appName }} · Eliminación de cuenta</p>
+          <p class="inline-flex items-center gap-2 rounded-full border border-brand-neon/40 bg-brand-neon/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-brand-neon">{{ appName }} · Eliminación de cuenta</p>
           <h1 class="mt-4 text-3xl font-semibold">Cómo solicitar la eliminación de tu cuenta</h1>
           <p class="mt-3 text-sm leading-7 text-brand-ink/70">
             Esta guía aplica a la app <strong>{{ appName }}</strong> (desarrollada por <strong>{{ developerName }}</strong>).
@@ -27,7 +27,7 @@ const supportEmail = 'alesauro30@gmail.com'
         </RouterLink>
       </div>
 
-      <section class="glass-panel p-6">
+      <section class="rounded-fluid border border-brand-neon/20 bg-brand-card/80 p-6 shadow-card">
         <h2 class="text-xl font-semibold">Pasos en la aplicación</h2>
         <ol class="mt-4 list-decimal space-y-2 pl-6 text-sm leading-7 text-brand-ink/70">
           <li>Abrí <strong>{{ appName }}</strong> e iniciá sesión.</li>
@@ -46,7 +46,7 @@ const supportEmail = 'alesauro30@gmail.com'
         </div>
       </section>
 
-      <section class="mt-6 glass-panel p-6">
+      <section class="mt-6 rounded-fluid border border-brand-neon/20 bg-brand-card/80 p-6 shadow-card">
         <h2 class="text-xl font-semibold">Capturas de pantalla (referencia)</h2>
         <p class="mt-2 text-sm leading-7 text-brand-ink/70">
           Las siguientes capturas muestran visualmente el flujo para solicitar la eliminación de cuenta.
@@ -85,7 +85,7 @@ const supportEmail = 'alesauro30@gmail.com'
         </div>
       </section>
 
-      <section class="mt-6 glass-panel p-6">
+      <section class="mt-6 rounded-fluid border border-brand-neon/20 bg-brand-card/80 p-6 shadow-card">
         <h2 class="text-xl font-semibold">Datos que se eliminan y datos que se conservan</h2>
         <p class="mt-2 text-sm leading-7 text-brand-ink/70">
           Resumen orientativo basado en la política de privacidad vigente. Los plazos pueden variar si existen obligaciones legales o incidentes de seguridad.

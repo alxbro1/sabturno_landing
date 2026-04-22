@@ -204,11 +204,11 @@ onMounted(() => {
           <PasswordReset :passwordResetToken="tokenInput || sampleToken" :passwordResetTokenExpires="tokenExpiresInput || sampleExpires" @success="handleResetSuccess" />
         </div>
         <template v-else>
-          <section  id="hero" class="glass-panel relative mt-4 overflow-hidden">
-            <div class="absolute inset-0 bg-grid-soft opacity-40"></div>
+          <section  id="hero" class="relative mt-4 overflow-hidden rounded-fluid border border-brand-neon/20 bg-brand-card/80 p-4 shadow-card">
+            <div class="absolute inset-0 opacity-40 [background-size:40px_40px] [background-image:linear-gradient(to_right,rgba(0,240,104,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,240,104,0.08)_1px,transparent_1px)]"></div>
             <div class="relative grid gap-10 lg:grid-cols-[1.05fr,0.95fr]">
               <div class="space-y-8 p-4">
-                <span class="badge">Locales + Clientes en un mismo pulso</span>
+                <span class="inline-flex items-center gap-2 rounded-full border border-brand-neon/40 bg-brand-neon/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-brand-neon">Locales + Clientes en un mismo pulso</span>
                 <div class="space-y-4">
                   <h1 class="text-4xl font-semibold text-brand-ink sm:text-5xl">
                     La forma más simple de gestionar tus turnos, totalmente gratis
@@ -230,12 +230,12 @@ onMounted(() => {
                   </button>
                 </div>
                 <ul class="flex flex-wrap gap-3">
-                  <li v-for="benefit in heroBenefits" :key="benefit" class="stat-chip">
+                  <li v-for="benefit in heroBenefits" :key="benefit" class="rounded-full border border-brand-neon/40 bg-brand-muted/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-brand-ink/90">
                     {{ benefit }}
                   </li>
                 </ul>
               </div>
-              <div class="hero-card">
+              <div class="relative overflow-hidden rounded-fluid border border-brand-neon/20 bg-gradient-to-br from-brand-muted/95 via-brand-card/90 to-brand-muted/90 px-6 py-8 shadow-glow">
                 <div class="mb-6 flex items-center justify-between text-sm text-brand-ink/60">
                   <span>Agenda Hoy</span>
                   <span>Sabturno OS</span>
@@ -261,14 +261,14 @@ onMounted(() => {
 
           <section id="features" class="space-y-12">
             <div class="mx-auto max-w-3xl text-center">
-              <p class="badge">Diseñado para ambos lados del mostrador</p>
+              <p class="inline-flex items-center gap-2 rounded-full border border-brand-neon/40 bg-brand-neon/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-brand-neon">Diseñado para ambos lados del mostrador</p>
               <h2 class="mt-6 text-4xl font-semibold text-brand-ink">Una sola plataforma para coordinar servicios, comunidad y negocio</h2>
               <p class="mt-4 text-base text-brand-ink/70">
                 Estandarizá procesos sin perder el toque humano: workflows claros para managers y una app amable para tus clientes fieles.
               </p>
             </div>
             <div class="grid gap-6 md:grid-cols-2">
-              <article v-for="column in featureColumns" :key="column.title" class="glass-panel h-full p-4">
+              <article v-for="column in featureColumns" :key="column.title" class="h-full rounded-fluid border border-brand-neon/20 bg-brand-card/80 p-4 shadow-card">
                 <header class="mb-6 flex items-center justify-between">
                   <div>
                     <p class="text-sm uppercase tracking-wide text-brand-ink/60">{{ column.focus }}</p>
@@ -288,9 +288,9 @@ onMounted(() => {
             </div>
           </section>
 
-          <section id="workflow" class="glass-panel space-y-10 p-4">
+          <section id="workflow" class="space-y-10 rounded-fluid border border-brand-neon/20 bg-brand-card/80 p-4 shadow-card">
             <div class="space-y-3">
-              <p class="badge">Implementación express</p>
+              <p class="inline-flex items-center gap-2 rounded-full border border-brand-neon/40 bg-brand-neon/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-brand-neon">Implementación express</p>
               <div class="flex flex-wrap items-end justify-between gap-4">
                 <div>
                   <h2 class="text-3xl font-semibold text-brand-ink">Tu operación lista en tres hitos claros</h2>
@@ -309,10 +309,10 @@ onMounted(() => {
             </ol>
           </section>
 
-          <section id="contact" class="glass-panel">
+          <section id="contact" class="rounded-fluid border border-brand-neon/20 bg-brand-card/80 p-4 shadow-card">
             <div class="grid gap-10 lg:grid-cols-[1.1fr,0.9fr]">
               <div class="space-y-4 p-4">
-                <p class="badge">Empieza hoy mismo</p>
+                <p class="inline-flex items-center gap-2 rounded-full border border-brand-neon/40 bg-brand-neon/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-brand-neon">Empieza hoy mismo</p>
                 <h2 class="text-3xl font-semibold text-brand-ink">Crea tu cuenta gratuita en Sabturno</h2>
                 <p class="text-base text-brand-ink/70">
                   Entendemos las horas pico, las cancelaciones de último minuto y la necesidad de mantener motivado al equipo. Registrate sin costo y
