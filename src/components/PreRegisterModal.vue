@@ -146,7 +146,7 @@ onBeforeUnmount(() => {
             class="rounded-full border border-brand-neon/30 bg-brand-card px-3 py-1 text-sm text-brand-ink/70 transition hover:text-brand-neon"
             @click="close"
           >
-            Cerrar
+            X
           </button>
         </header>
 

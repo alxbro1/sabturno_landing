@@ -11,6 +11,7 @@
     "format": "prettier \"src/**/*.{vue,ts,js,css,md}\" --write"
   },
   "dependencies": {
+    "@heroicons/vue": "^2.2.0",
     "marked": "^17.0.1",
     "vue": "^3.4.15",
     "vue-router": "^4.6.4"

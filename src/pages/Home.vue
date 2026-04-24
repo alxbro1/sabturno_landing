@@ -1,132 +1,205 @@
 <script setup lang="ts">
-import { RouterLink } from 'vue-router'
+import { onMounted, ref } from 'vue'
+import PasswordReset from '../components/PasswordReset.vue'
+import PreRegisterModal from '../components/PreRegisterModal.vue'
+import HomeAudienceSection from '../components/home/HomeAudienceSection.vue'
+import HomeCtaSection from '../components/home/HomeCtaSection.vue'
+import HomeFaqSection from '../components/home/HomeFaqSection.vue'
+import HomeFooter from '../components/home/HomeFooter.vue'
+import HomeHeader from '../components/home/HomeHeader.vue'
+import HomeHeroSection from '../components/home/HomeHeroSection.vue'
+import HomeLaunchSection from '../components/home/HomeLaunchSection.vue'
+import HomeStorySection from '../components/home/HomeStorySection.vue'
+import HomeTestimonialsSection from '../components/home/HomeTestimonialsSection.vue'
+import HomeWebAppSection from '../components/home/HomeWebAppSection.vue'
+import PreRegisterNotice from '../components/home/PreRegisterNotice.vue'
+import type {
+  AudienceCard,
+  CtaHighlight,
+  FaqItem,
+  FlowStep,
+  HeroMetric,
+  NavItem,
+  ServiceSnapshot,
+  StoryCard,
+  Testimonial,
+  WebMoment,
+} from '../components/home/types'
 
-type Feature = {
-  title: string
-  description: string
-}
-
-type FeatureColumn = {
-  title: string
-  tagline: string
-  focus: string
-  items: Feature[]
-}
-
-type WorkflowStep = {
-  title: string
-  description: string
-  result: string
-}
-
-type Stat = {
-  label: string
-  value: string
-}
-
-type CtaHighlight = {
-  title: string
-  detail: string
-}
-
-const heroBenefits = [
-  'Registro 100% gratis para locales y clientes',
-  'Agenda inteligente y centralizada',
-  'Recordatorios automáticos al cliente',
+const navItems: NavItem[] = [
+  { label: 'Propuesta', href: '#proposal' },
+  { label: 'App Web', href: '#app-web' },
+  { label: 'Experiencia', href: '#experience' },
+  { label: 'Implementación', href: '#launch' },
+  { label: 'Contacto', href: '#contact' },
 ]
 
-const stats: Stat[] = [
-  { label: 'Locales activos', value: '180+' },
-  { label: 'Turnos confirmados/mes', value: '32K' },
-  { label: 'Cancelaciones evitadas', value: '−38%' },
-]
-
-const featureColumns: FeatureColumn[] = [
+const heroMetrics: HeroMetric[] = [
   {
-    title: 'Para locales',
-    tagline: 'Control total del negocio',
-    focus: 'Operaciones',
-    items: [
-      {
-        title: 'Agenda compartida',
-        description: 'Sincronizá barbers, estilistas y cabinas en una sola vista con permisos personalizados.',
-      },
-      {
-        title: 'Cobranzas claras',
-        description: 'Registrá anticipos y pagos desde la misma app para conciliar caja al cierre del día.',
-      },
-      {
-        title: 'Métricas inmediatas',
-        description: 'Detectá horas ociosas, servicios estrella y equipos con mayor retención.',
-      },
+    value: '100% gratis',
+    label: 'Para locales y clientes',
+    detail: 'Sin costo de suscripción ni cobro al cliente. La app es gratuita para todos los que la usan.',
+  },
+  {
+    value: '+61%',
+    label: 'Más turnos pagos',
+    detail: 'Frente al modelo WhatsApp sin cobro previo, la app web convierte reservas en pagos confirmados antes del turno.',
+  },
+  {
+    value: '1 sola agenda',
+    label: 'Todo sincronizado',
+    detail: 'Móvil y web comparten disponibilidad en tiempo real.',
+  },
+]
+
+const heroHighlights = [
+  'Ideal para barberías, peluquerías y centros de estética',
+  'Clientes reservando sin llamadas ni WhatsApps infinitos',
+  'Diseño pensado para convertir visitas en turnos confirmados',
+]
+
+const storyCards: StoryCard[] = [
+  {
+    eyebrow: 'Sin descargas obligatorias',
+    title: 'Más personas terminan la reserva',
+    description: 'Cuando el acceso es directo desde el navegador, la intención se convierte más rápido en turno confirmado.',
+  },
+  {
+    eyebrow: 'Branding para tu local',
+    title: 'Una experiencia más profesional',
+    description: 'Tu negocio deja de depender de mensajes improvisados y pasa a ofrecer una experiencia moderna y ordenada.',
+  },
+  {
+    eyebrow: 'Operación centralizada',
+    title: 'El equipo trabaja con claridad',
+    description: 'Todo se organiza desde el mismo sistema: horarios, servicios, disponibilidad y confirmaciones.',
+  },
+]
+
+const audiences: AudienceCard[] = [
+  {
+    eyebrow: 'Para el local',
+    title: 'Control visual del negocio, sin procesos manuales.',
+    summary: 'Sabturno ordena la agenda, baja errores y te da una presencia digital más fuerte frente al cliente.',
+    bullets: [
+      'Agenda por profesional, servicio o sucursal',
+      'Confirmaciones y reprogramaciones sin intervención manual',
+      'Un link listo para compartir en Instagram, Google o WhatsApp',
     ],
   },
   {
-    title: 'Para clientes',
-    tagline: 'Experiencia sin fricción',
-    focus: 'Comunidad',
-    items: [
-      {
-        title: 'Booking en 2 taps',
-        description: 'Disponibilidad real, combos favoritos y medios de pago guardados.',
-      },
-      {
-        title: 'Seguimiento humanizado',
-        description: 'Recordatorios por WhatsApp o push con tono del local y opción de feedback instantáneo.',
-      },
-      {
-        title: 'Programa de fidelidad',
-        description: 'Sellos automáticos y upgrades cuando completan cierta cantidad de turnos.',
-      },
+    eyebrow: 'Para tus clientes',
+    title: 'Reservar se siente rápido, claro y confiable.',
+    summary: 'La app web les permite resolver todo en pocos pasos, sin instalar nada y sin perder tiempo.',
+    bullets: [
+      'Disponibilidad real antes de reservar',
+      'Flujo simple para elegir servicio, horario y profesional',
+      'Experiencia mobile-first pensada para volver a reservar',
     ],
   },
 ]
 
-const workflow: WorkflowStep[] = [
+const webMoments: WebMoment[] = [
   {
-    title: 'Configurar el local',
-    description: 'Cargamos servicios, staff y horarios diferenciados para cada silla en menos de 30 minutos.',
-    result: 'Agenda publicada 24/7',
+    label: 'Descubrimiento',
+    title: 'Te encuentran y reservan',
+    description: 'El usuario ve tu perfil o promoción y entra directo a la app web sin pasos extra.',
+    result: 'Más conversiones desde redes y campañas.',
   },
   {
-    title: 'Comunicar a la comunidad',
-    description: 'Enviá el link inteligente para que clientes reserven, paguen y reprogramen sin llamar.',
-    result: 'Turnos confirmados automáticamente',
+    label: 'Reserva',
+    title: 'Elige lo que tiene disponible',
+    description: 'La disponibilidad está sincronizada con tu operación real para evitar confusión o saturación.',
+    result: 'Menos idas y vueltas y menos errores.',
   },
   {
-    title: 'Optimizar decisiones',
-    description: 'Dashboards inmediatos para saber qué promos activar y cuándo sumar nuevo talento.',
-    result: 'Operación rentable y predecible',
+    label: 'Pagos',
+    title: 'Reservas que si se concretan',
+    description: 'Con la app web es más fácil que el cliente complete su reserva y pague por adelantado para asegurar su turno',
+    result: 'Más turnos confirmados y menos ausencias',
+  },
+]
+
+const launchSteps: FlowStep[] = [
+  {
+    step: '01',
+    title: 'Armamos tu operación',
+    description: 'Cargamos servicios, horarios, profesionales y reglas para que la agenda quede lista para publicar.',
+  },
+  {
+    step: '02',
+    title: 'Activamos el canal web',
+    description: 'Compartís un link directo y tus clientes ya pueden reservar desde el navegador en cualquier momento.',
+  },
+  {
+    step: '03',
+    title: 'Escalás con mejor conversión',
+    description: 'Con menos fricción en la reserva, tus campañas y recomendaciones empiezan a rendir más.',
+  },
+]
+
+const testimonials: Testimonial[] = [
+  {
+    quote: 'La diferencia fue inmediata: dejamos de perder reservas por gente que no quería instalar nada.',
+    author: 'La Barbería',
+    role: 'Testeo cerrado Sabturno',
+  },
+  {
+    quote: 'La experiencia se siente mucho más premium. El cliente entiende rápido qué hacer y termina la reserva.',
+    author: 'Peluquería boutique',
+    role: 'Early adopter',
+  },
+  {
+    quote: 'Para el staff también fue mejor: una sola agenda y menos mensajes sueltos para coordinar horarios.',
+    author: 'Centro de estética',
+    role: 'Operación centralizada',
+  },
+]
+
+const faqItems: FaqItem[] = [
+  {
+    question: '¿La app web reemplaza la app móvil?',
+    answer: 'No. La complementa. La app web abre un canal de entrada más directo para clientes, mientras toda la operación sigue sincronizada.',
+  },
+  {
+    question: '¿Sirve aunque hoy tome turnos por WhatsApp?',
+    answer: 'Sí. Justamente ahí es donde más se nota el cambio: el cliente pasa de preguntar manualmente a reservar con autonomía.',
+  },
+  {
+    question: '¿Puedo compartirla desde Instagram o Google?',
+    answer: 'Sí. El objetivo es que tu link de reserva viva donde hoy ya te descubren tus clientes.',
+  },
+  {
+    question: '¿La prueba cerrada sigue disponible?',
+    answer: 'Sí. Podés pre-registrarte para sumarte al testeo y recibir acceso con acompañamiento.',
   },
 ]
 
 const ctaHighlights: CtaHighlight[] = [
   {
-    title: 'Registro gratuito',
-    detail: 'Crea tu cuenta en minutos, sin tarjeta ni contrato mínimo.',
+    title: 'Prueba cerrada con acompañamiento',
+    detail: 'Te ayudamos a dejar lista la experiencia para que el cambio se note desde el primer día.',
   },
   {
-    title: 'Soporte en español',
-    detail: 'Acompañamiento por chat y correo para que nadie se quede trabado.',
+    title: 'Foco en conversión real',
+    detail: 'No es solo “tener un sistema”: es lograr que más visitas terminen reservando.',
   },
   {
-    title: 'Actualizaciones continuas',
-    detail: 'Lanzamos mejoras frecuentes teniendo en cuenta el feedback de la comunidad.',
+    title: 'Preparado para crecer',
+    detail: 'Sabturno ya nace pensando en multi-canal, equipo y operación ordenada.',
   },
 ]
 
-const sampleServices = [
-  { name: 'Corte', time: '10:15', location: 'Sucursal Palermo' },
-  { name: 'Color + Brushing', time: '11:45', location: 'Sucursal Centro' },
-  { name: 'Hidratación', time: '13:15', location: 'Sucursal Recoleta' },
+const serviceSnapshots: ServiceSnapshot[] = [
+  { service: 'Fade + barba', time: '10:15', client: 'Martín confirmó desde la app web' },
+  { service: 'Color + brushing', time: '12:00', client: 'Julieta reprogramó sin llamar' },
+  { service: 'Perfilado premium', time: '14:30', client: 'Camila reservó desde Instagram' },
 ]
-import { ref, onMounted } from 'vue'
-import PasswordReset from '../components/PasswordReset.vue'
-import PreRegisterModal from '../components/PreRegisterModal.vue'
 
 const activeTab = ref<'main' | 'reset'>('main')
 const isPreRegisterOpen = ref(false)
 const showPreRegisterNotice = ref(false)
+const mobileMenuOpen = ref(false)
 const tokenInput = ref('')
 const tokenExpiresInput = ref('')
 const sampleToken = 'demo-reset-token-abc123'
@@ -137,6 +210,7 @@ function handleResetSuccess() {
 }
 
 function openPreRegister() {
+  mobileMenuOpen.value = false
   isPreRegisterOpen.value = true
 }
 
@@ -144,225 +218,71 @@ function handlePreRegisterSuccess() {
   showPreRegisterNotice.value = true
 }
 
-onMounted(() => {
-    const params = new URLSearchParams(window.location.search)
-    const token = params.get('passwordResetToken') || params.get('token')
-    const expires = params.get('passwordResetTokenExpires') || params.get('expires')
-    if (token) {
-      tokenInput.value = token
-      if (expires) tokenExpiresInput.value = expires
-      activeTab.value = 'reset'
-    }
-})
+function closeMobileMenu() {
+  mobileMenuOpen.value = false
+}
 
+onMounted(() => {
+  const params = new URLSearchParams(window.location.search)
+  const token = params.get('passwordResetToken') || params.get('token')
+  const expires = params.get('passwordResetTokenExpires') || params.get('expires')
+
+  if (token) {
+    tokenInput.value = token
+    if (expires) tokenExpiresInput.value = expires
+    activeTab.value = 'reset'
+  }
+})
 </script>
 
 <template>
-  <div class="bg-brand-night text-brand-ink">
+  <div class="relative isolate overflow-clip bg-brand-night text-brand-ink">
+    <div class="pointer-events-none absolute -left-40 -top-24 -z-20 h-[32rem] w-[32rem] rounded-full opacity-35 blur-[80px] [background:radial-gradient(circle,rgba(0,240,104,0.85)_0%,rgba(0,240,104,0)_70%)]"></div>
+    <div class="pointer-events-none absolute -right-40 top-72 -z-20 h-[32rem] w-[32rem] rounded-full opacity-35 blur-[80px] [background:radial-gradient(circle,rgba(67,206,162,0.42)_0%,rgba(67,206,162,0)_72%)]"></div>
+    <div class="pointer-events-none absolute inset-0 -z-30 opacity-30 [background-image:linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:72px_72px] [mask-image:linear-gradient(180deg,rgba(0,0,0,0.8),transparent_85%)]"></div>
+
     <PreRegisterModal
       :open="isPreRegisterOpen"
       @close="isPreRegisterOpen = false"
       @success="handlePreRegisterSuccess"
     />
 
-    <div v-if="showPreRegisterNotice" class="mx-auto max-w-6xl px-4 pt-4 lg:px-0">
-      <div class="flex items-start justify-between gap-4 rounded-3xl border border-brand-neon/20 bg-brand-muted/90 p-4 shadow-card">
-        <p class="text-sm text-brand-ink/70">
-          Pre-registro enviado. Esto puede demorar hasta 24 hs en llegarte por correo (o confirmación).
-        </p>
-        <button
-          type="button"
-          class="rounded-full border border-brand-neon/30 bg-brand-card px-3 py-1 text-xs font-semibold text-brand-ink/70 transition hover:text-brand-neon"
-          @click="showPreRegisterNotice = false"
-        >
-          Cerrar
-        </button>
+    <PreRegisterNotice v-if="showPreRegisterNotice" @close="showPreRegisterNotice = false" />
+
+    <HomeHeader
+      :nav-items="navItems"
+      :mobile-menu-open="mobileMenuOpen"
+      @open-pre-register="openPreRegister"
+      @close-mobile-menu="closeMobileMenu"
+      @toggle-mobile-menu="mobileMenuOpen = !mobileMenuOpen"
+    />
+
+    <main class="mx-auto max-w-7xl px-4 pb-24 pt-8 lg:px-6">
+      <div v-if="activeTab === 'reset'" class="mx-auto max-w-3xl py-12">
+        <PasswordReset
+          :password-reset-token="tokenInput || sampleToken"
+          :password-reset-token-expires="tokenExpiresInput || sampleExpires"
+          @success="handleResetSuccess"
+        />
       </div>
-    </div>
-    <header class="mx-auto flex max-w-6xl items-center justify-between px-4 py-6 lg:px-0">
-      <div class="flex">
-        <img src="/white_logotype.webp" alt="Logo Sabturno" class="h-14">
-      </div>
-      <nav class="hidden items-center gap-6 text-sm font-medium text-brand-ink/70 md:flex">
-        <a href="#features" class="hover:text-brand-neon transition">Funciones</a>
-        <a href="#workflow" class="hover:text-brand-neon transition">Cómo funciona</a>
-        <a href="#contact" class="hover:text-brand-neon transition">Contacto</a>
-        <RouterLink to="/terminos-y-condiciones" class="text-xs underline underline-offset-4 hover:text-brand-neon transition">Términos y condiciones</RouterLink>
-        <RouterLink to="/politica-de-privacidad" class="text-xs underline underline-offset-4 hover:text-brand-neon transition">Política de privacidad</RouterLink>
-      </nav>
-      <button 
-        class="hidden rounded-full bg-brand-neon px-5 py-2 text-sm font-semibold text-brand-night shadow-card transition hover:bg-brand-neon/80 md:block"
-        @click="openPreRegister"
-      >
-        Descargar Ahora
-      </button>
-    </header>
 
+      <template v-else>
+        <HomeHeroSection
+          :hero-highlights="heroHighlights"
+          :hero-metrics="heroMetrics"
+          :service-snapshots="serviceSnapshots"
+          @open-pre-register="openPreRegister"
+        />
+        <HomeWebAppSection :web-moments="webMoments" />
+        <HomeStorySection :story-cards="storyCards" />
+        <HomeAudienceSection :audiences="audiences" />
+        <HomeTestimonialsSection :testimonials="testimonials" />
+        <HomeLaunchSection :launch-steps="launchSteps" />
+        <HomeCtaSection :cta-highlights="ctaHighlights" @open-pre-register="openPreRegister" />
+        <HomeFaqSection :faq-items="faqItems" />
+      </template>
+    </main>
 
-      <main class="mx-auto max-w-6xl space-y-24 p-4 pb-24 lg:px-0">
-        <div v-if="activeTab==='reset'" class="p-4">
-          <PasswordReset :passwordResetToken="tokenInput || sampleToken" :passwordResetTokenExpires="tokenExpiresInput || sampleExpires" @success="handleResetSuccess" />
-        </div>
-        <template v-else>
-          <section  id="hero" class="relative mt-4 overflow-hidden rounded-fluid border border-brand-neon/20 bg-brand-card/80 p-4 shadow-card">
-            <div class="absolute inset-0 opacity-40 [background-size:40px_40px] [background-image:linear-gradient(to_right,rgba(0,240,104,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,240,104,0.08)_1px,transparent_1px)]"></div>
-            <div class="relative grid gap-10 lg:grid-cols-[1.05fr,0.95fr]">
-              <div class="space-y-8 p-4">
-                <span class="inline-flex items-center gap-2 rounded-full border border-brand-neon/40 bg-brand-neon/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-brand-neon">Locales + Clientes en un mismo pulso</span>
-                <div class="space-y-4">
-                  <h1 class="text-4xl font-semibold text-brand-ink sm:text-5xl">
-                    La forma más simple de gestionar tus turnos, totalmente gratis
-                  </h1>
-                  <p class="text-lg text-brand-ink/70">
-                    Sabturno conecta barberías, peluquerías y centros de estética con su comunidad. Cualquier persona puede
-                    registrarse gratis, reservar y gestionar turnos sin llamadas ni chats eternos.
-                  </p>
-                </div>
-                <div class="flex flex-wrap gap-3">
-                  <button 
-                  class="rounded-full bg-brand-neon px-6 py-3 text-sm font-semibold text-brand-night shadow-card transition hover:-translate-y-0.5 hover:bg-brand-neon/80"
-                  @click="openPreRegister"
-                >
-                    Descargar Ahora
-                  </button>
-                  <button class="rounded-full border border-brand-neon/40 bg-brand-muted/70 px-6 py-3 text-sm font-semibold text-brand-ink transition hover:-translate-y-0.5 hover:border-brand-neon">
-                    Ver cómo funciona
-                  </button>
-                </div>
-                <ul class="flex flex-wrap gap-3">
-                  <li v-for="benefit in heroBenefits" :key="benefit" class="rounded-full border border-brand-neon/40 bg-brand-muted/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-brand-ink/90">
-                    {{ benefit }}
-                  </li>
-                </ul>
-              </div>
-              <div class="relative overflow-hidden rounded-fluid border border-brand-neon/20 bg-gradient-to-br from-brand-muted/95 via-brand-card/90 to-brand-muted/90 px-6 py-8 shadow-glow">
-                <div class="mb-6 flex items-center justify-between text-sm text-brand-ink/60">
-                  <span>Agenda Hoy</span>
-                  <span>Sabturno OS</span>
-                </div>
-                <div class="space-y-4">
-                  <div v-for="service in sampleServices" :key="service.name" class="rounded-2xl border border-brand-neon/20 bg-brand-muted/90 px-4 py-3 shadow-card">
-                    <div class="flex items-center justify-between text-sm">
-                      <p class="font-semibold text-brand-ink">{{ service.name }}</p>
-                      <span class="text-brand-ink/60">{{ service.time }} hs</span>
-                    </div>
-                    <p class="text-xs text-brand-ink/60">Cliente confirmado · {{ service.location }}</p>
-                  </div>
-                  <div class="mt-8 grid gap-4 sm:grid-cols-3">
-                    <div v-for="metric in stats" :key="metric.label" class="rounded-2xl border border-brand-neon/20 bg-brand-muted/90 px-4 py-3 text-center">
-                      <p class="text-2xl font-semibold text-brand-neon">{{ metric.value }}</p>
-                      <p class="text-xs text-brand-ink/60">{{ metric.label }}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section id="features" class="space-y-12">
-            <div class="mx-auto max-w-3xl text-center">
-              <p class="inline-flex items-center gap-2 rounded-full border border-brand-neon/40 bg-brand-neon/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-brand-neon">Diseñado para ambos lados del mostrador</p>
-              <h2 class="mt-6 text-4xl font-semibold text-brand-ink">Una sola plataforma para coordinar servicios, comunidad y negocio</h2>
-              <p class="mt-4 text-base text-brand-ink/70">
-                Estandarizá procesos sin perder el toque humano: workflows claros para managers y una app amable para tus clientes fieles.
-              </p>
-            </div>
-            <div class="grid gap-6 md:grid-cols-2">
-              <article v-for="column in featureColumns" :key="column.title" class="h-full rounded-fluid border border-brand-neon/20 bg-brand-card/80 p-4 shadow-card">
-                <header class="mb-6 flex items-center justify-between">
-                  <div>
-                    <p class="text-sm uppercase tracking-wide text-brand-ink/60">{{ column.focus }}</p>
-                    <h3 class="text-2xl font-semibold text-brand-ink">{{ column.title }}</h3>
-                  </div>
-                  <span class="rounded-full border border-brand-neon/30 bg-brand-neon/10 px-3 py-1 text-xs font-semibold text-brand-neon">
-                    {{ column.tagline }}
-                  </span>
-                </header>
-                <ul class="space-y-5">
-                  <li v-for="item in column.items" :key="item.title" class="rounded-2xl border border-brand-neon/20 bg-brand-muted/80 px-4 py-4">
-                    <h4 class="text-lg font-semibold text-brand-ink">{{ item.title }}</h4>
-                    <p class="mt-1 text-sm text-brand-ink/70">{{ item.description }}</p>
-                  </li>
-                </ul>
-              </article>
-            </div>
-          </section>
-
-          <section id="workflow" class="space-y-10 rounded-fluid border border-brand-neon/20 bg-brand-card/80 p-4 shadow-card">
-            <div class="space-y-3">
-              <p class="inline-flex items-center gap-2 rounded-full border border-brand-neon/40 bg-brand-neon/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-brand-neon">Implementación express</p>
-              <div class="flex flex-wrap items-end justify-between gap-4">
-                <div>
-                  <h2 class="text-3xl font-semibold text-brand-ink">Tu operación lista en tres hitos claros</h2>
-                  <p class="text-base text-brand-ink/70">Sin hojas de cálculo ni llamadas eternas: todo vive en Sabturno.</p>
-                </div>
-                <div class="text-sm text-brand-ink/60">Tiempo promedio de puesta en marcha: 5 días</div>
-              </div>
-            </div>
-            <ol class="grid gap-6 md:grid-cols-3">
-              <li v-for="(step, index) in workflow" :key="step.title" class="rounded-3xl border border-brand-neon/20 bg-brand-muted/80 p-5">
-                <span class="text-xs font-semibold uppercase tracking-[0.3em] text-brand-ink/40">0{{ index + 1 }}</span>
-                <h3 class="mt-4 text-xl font-semibold text-brand-ink">{{ step.title }}</h3>
-                <p class="mt-2 text-sm text-brand-ink/70">{{ step.description }}</p>
-                <p class="mt-4 text-sm font-semibold text-brand-neon">{{ step.result }}</p>
-              </li>
-            </ol>
-          </section>
-
-          <section id="contact" class="rounded-fluid border border-brand-neon/20 bg-brand-card/80 p-4 shadow-card">
-            <div class="grid gap-10 lg:grid-cols-[1.1fr,0.9fr]">
-              <div class="space-y-4 p-4">
-                <p class="inline-flex items-center gap-2 rounded-full border border-brand-neon/40 bg-brand-neon/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-brand-neon">Empieza hoy mismo</p>
-                <h2 class="text-3xl font-semibold text-brand-ink">Crea tu cuenta gratuita en Sabturno</h2>
-                <p class="text-base text-brand-ink/70">
-                  Entendemos las horas pico, las cancelaciones de último minuto y la necesidad de mantener motivado al equipo. Registrate sin costo y
-                  empezá a ordenar tu día a día desde la app.
-                </p>
-                <div class="grid gap-4 sm:grid-cols-3">
-                  <div v-for="stat in stats" :key="stat.label" class="rounded-2xl border border-brand-neon/20 bg-brand-muted/90 px-4 py-3 text-center">
-                    <p class="text-xl font-semibold text-brand-neon">{{ stat.value }}</p>
-                    <p class="text-xs text-brand-ink/60">{{ stat.label }}</p>
-                  </div>
-                </div>
-              </div>
-              <div class="rounded-3xl border border-brand-neon/20 bg-brand-muted/90 p-6 shadow-card">
-                <div class="space-y-5">
-                  <div class="rounded-2xl border border-brand-neon/30 bg-brand-neon/10 p-4">
-                    <p class="text-sm font-semibold text-brand-neon">Disponible</p>
-                    <p class="text-2xl font-semibold text-brand-ink">Crea tu cuenta</p>
-                    <p class="text-sm text-brand-ink/70">Registrate gratis y empezá a usar Sabturno en minutos.</p>
-                  </div>
-                  <ul class="space-y-4">
-                    <li v-for="highlight in ctaHighlights" :key="highlight.title" class="rounded-2xl border border-brand-neon/20 bg-brand-card px-4 py-3">
-                      <p class="text-sm font-semibold text-brand-ink">{{ highlight.title }}</p>
-                      <p class="text-sm text-brand-ink/60">{{ highlight.detail }}</p>
-                    </li>
-                  </ul>
-                  <button
-                    type="button"
-                    class="w-full rounded-full bg-brand-neon py-3 text-sm font-semibold text-brand-night transition hover:bg-brand-neon/80"
-                    @click="openPreRegister"
-                  >
-                    Crear cuenta gratis
-                  </button>
-                  <p class="text-center text-xs text-brand-ink/60">
-                    Al continuar aceptás nuestros
-                    <a href="/terminos-y-condiciones.html" class="underline underline-offset-2 hover:text-brand-neon transition">Términos y Condiciones</a>.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
-        </template>
-      </main>
-    <footer class="border-t border-brand-neon/20 bg-brand-card/80">
-      <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 py-4 text-xs text-brand-ink/60 sm:flex-row lg:px-0">
-        <p>© {{ new Date().getFullYear() }} Sabturno. Todos los derechos reservados.</p>
-        <div class="flex flex-wrap items-center gap-4">
-          <RouterLink to="/terminos-y-condiciones" class="underline underline-offset-2 hover:text-brand-neon transition">Términos y Condiciones</RouterLink>
-          <RouterLink to="/politica-de-privacidad" class="underline underline-offset-2 hover:text-brand-neon transition">Política de Privacidad</RouterLink>
-        </div>
-      </div>
-    </footer>
+    <HomeFooter />
   </div>
 </template>
