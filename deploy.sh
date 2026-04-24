@@ -4,7 +4,7 @@ set -e
 GREEN='\033[0;32m'
 NC='\033[0m'
 
-SERVER="ubuntu@3.87.112.148"
+SERVER="ubuntu@54.210.182.128"
 KEY="/Users/alexandersauro/Desktop/Credentials/PEM/styleup-key.pem"
 REMOTE_PATH="/home/ubuntu/web"
 LOCAL_DIST="./dist"
