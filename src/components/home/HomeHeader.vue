@@ -46,7 +46,7 @@ const emit = defineEmits<{
             Sumarme al test
           </button>
           <a
-            href="https://sabturno.com/app/"
+            href="https://appweb.sabturno.com/app/"
             class="rounded-full bg-brand-neon px-5 py-2 text-sm font-semibold text-brand-night transition hover:-translate-y-0.5 hover:bg-brand-neon/85"
           >
             Probar App Web
@@ -105,7 +105,7 @@ const emit = defineEmits<{
             Sumarme al test
           </button>
           <a
-            href="https://sabturno.com/app/"
+            href="https://appweb.sabturno.com/app/"
             class="rounded-full bg-brand-neon px-5 py-3 text-center text-sm font-semibold text-brand-night"
             @click="emit('close-mobile-menu')"
           >
