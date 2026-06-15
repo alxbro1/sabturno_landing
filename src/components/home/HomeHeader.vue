@@ -43,7 +43,7 @@ const emit = defineEmits<{
             class="rounded-full border border-brand-neon/20 bg-brand-card px-5 py-2 text-sm font-semibold text-brand-ink transition hover:-translate-y-0.5 hover:border-brand-neon"
             @click="emit('open-pre-register')"
           >
-            Sumarme al test
+            Probar Sabturno
           </button>
           <a
             href="https://appweb.sabturno.com/"
@@ -102,7 +102,7 @@ const emit = defineEmits<{
             class="rounded-full border border-brand-neon/20 bg-brand-muted px-5 py-3 text-sm font-semibold text-brand-ink"
             @click="emit('open-pre-register')"
           >
-            Sumarme al test
+            Probar Sabturno
           </button>
           <a
             href="https://appweb.sabturno.com/"

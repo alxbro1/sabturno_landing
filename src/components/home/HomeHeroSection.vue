@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BoltIcon, CalendarDaysIcon, CreditCardIcon } from '@heroicons/vue/24/outline'
+import { BanknotesIcon, BoltIcon, CalendarDaysIcon, CreditCardIcon } from '@heroicons/vue/24/outline'
 import type { HeroMetric, ServiceSnapshot } from './types'
 
 defineProps<{
@@ -18,14 +18,10 @@ const metricIcons = [CalendarDaysIcon, CreditCardIcon, BoltIcon]
 <template>
   <section
     id="hero"
-    class="relative overflow-hidden rounded-[40px] border border-white/10 bg-[linear-gradient(180deg,rgba(22,22,22,0.94)_0%,rgba(10,10,10,0.88)_100%),radial-gradient(circle_at_top_left,rgba(0,240,104,0.12)_0%,rgba(0,240,104,0)_45%)] p-5 shadow-[0_24px_90px_rgba(0,0,0,0.28)] md:p-6 xl:p-8"
+    class="glass-panel relative overflow-hidden rounded-panel border border-white/10 p-5 shadow-glow md:p-6 xl:p-8"
   >
     <div class="space-y-8">
-      <div
-        class="inline-flex items-center gap-2 rounded-full border border-brand-neon/20 bg-brand-neon/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-brand-neon"
-      >
-        App movil + App web en un solo sistema
-      </div>
+      <div class="badge">App movil + App web en un solo sistema</div>
       <div class="grid gap-8 lg:grid-cols-2 grid-cols-1">
         <div class="space-y-5 flex flex-col justify-between">
           <div class="space-y-5">
@@ -33,22 +29,34 @@ const metricIcons = [CalendarDaysIcon, CreditCardIcon, BoltIcon]
               class="max-w-3xl text-4xl font-semibold leading-[0.95] text-brand-ink sm:text-5xl 2xl:max-w-4xl 2xl:text-7xl"
             >
               Tu negocio siempre reservado.
-              <br>
+              <br />
               Sin llamadas, sin fricción.
             </h1>
             <p class="max-w-xl text-base leading-7 text-brand-ink/70 sm:text-lg">
               Tus clientes reservan desde el navegador en segundos. Tu agenda se actualiza sola.
             </p>
-            <div class="inline-flex items-center gap-3 rounded-2xl border border-[#009EE3]/40 bg-[#009EE3]/12 px-3 py-2">
-              <img
-                src="/brands/mercado-pago.svg"
-                alt="Mercado Pago"
-                class="h-8 w-auto"
-                loading="lazy"
+            <div class="flex flex-wrap gap-3">
+              <div
+                class="inline-flex items-center gap-3 rounded-2xl border border-[#009EE3]/40 bg-[#009EE3]/12 px-3 py-2"
               >
-              <p class="text-xs font-semibold uppercase tracking-[0.16em] text-[#7BCFFF]">
-                Pagos online con Mercado Pago
-              </p>
+                <img
+                  src="/brands/mercado-pago.svg"
+                  alt="Mercado Pago"
+                  class="h-8 w-auto"
+                  loading="lazy"
+                />
+                <p class="text-xs font-semibold uppercase tracking-[0.16em] text-[#7BCFFF]">
+                  Pagos online con Mercado Pago
+                </p>
+              </div>
+              <div
+                class="inline-flex items-center gap-3 rounded-2xl border border-brand-neon/30 bg-brand-neon/10 px-3 py-2"
+              >
+                <BanknotesIcon class="h-7 w-7 text-brand-neon" aria-hidden="true" />
+                <p class="text-xs font-semibold uppercase tracking-[0.16em] text-brand-neon">
+                  Transferencia bancaria directa
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -87,11 +95,7 @@ const metricIcons = [CalendarDaysIcon, CreditCardIcon, BoltIcon]
       </div>
 
       <ul class="grid gap-3 sm:grid-cols-2 2xl:grid-cols-3">
-        <li
-          v-for="highlight in heroHighlights"
-          :key="highlight"
-          class="rounded-[24px] border border-white/10 bg-white/5 px-4 py-3 text-[0.74rem] font-bold uppercase tracking-[0.14em] text-white/85"
-        >
+        <li v-for="highlight in heroHighlights" :key="highlight" class="stat-chip">
           {{ highlight }}
         </li>
       </ul>
@@ -100,7 +104,7 @@ const metricIcons = [CalendarDaysIcon, CreditCardIcon, BoltIcon]
         <article
           v-for="(metric, index) in heroMetrics"
           :key="metric.label"
-          class="rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02))] p-5 transition duration-200 hover:-translate-y-1.5 hover:border-brand-neon/35 hover:shadow-[0_20px_60px_rgba(0,0,0,0.24)]"
+          class="card-hover rounded-card border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02))] p-5 hover:border-brand-neon/35"
         >
           <div class="flex items-center gap-2">
             <component

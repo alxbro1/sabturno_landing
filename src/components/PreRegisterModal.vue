@@ -14,7 +14,7 @@ const props = withDefaults(
   }>(),
   {
     endpoint: undefined,
-  },
+  }
 )
 
 const emit = defineEmits<{
@@ -105,7 +105,7 @@ watch(
       setBodyScrollLocked(false)
     }
   },
-  { immediate: true },
+  { immediate: true }
 )
 
 onMounted(() => {
@@ -138,7 +138,8 @@ onBeforeUnmount(() => {
           <div class="space-y-1">
             <h2 class="text-2xl font-semibold text-brand-ink">Pre-registro a Sabturno</h2>
             <p class="text-sm text-brand-ink/70">
-              Al enviarlo, te agregamos a una lista de testers y vas a recibir un correo para unirte al grupo de testeo.
+              Al enviarlo, te sumamos a la lista de pre-registro y vas a recibir un correo con los
+              próximos pasos para empezar.
             </p>
           </div>
           <button
@@ -153,8 +154,12 @@ onBeforeUnmount(() => {
         <div class="mt-6" v-if="submitted">
           <div class="rounded-2xl border border-brand-neon/30 bg-brand-neon/10 p-4">
             <p class="text-sm font-semibold text-brand-neon">¡Listo!</p>
-            <p class="mt-1 text-sm text-brand-ink/70">Te vamos a contactar por correo con la invitación al grupo de testeo.</p>
-            <p class="mt-2 text-sm text-brand-ink/70">Esto puede demorar hasta 24 hs en llegarte (correo o confirmación).</p>
+            <p class="mt-1 text-sm text-brand-ink/70">
+              Te vamos a contactar por correo con los siguientes pasos para empezar.
+            </p>
+            <p class="mt-2 text-sm text-brand-ink/70">
+              Esto puede demorar hasta 24 hs en llegarte (correo o confirmación).
+            </p>
           </div>
           <div class="mt-4 flex justify-end">
             <button
@@ -169,7 +174,9 @@ onBeforeUnmount(() => {
 
         <form v-else class="mt-6 space-y-4" @submit.prevent="submit">
           <div>
-            <label class="text-sm font-semibold text-brand-ink" for="prereg-name">Nombre (opcional)</label>
+            <label class="text-sm font-semibold text-brand-ink" for="prereg-name"
+              >Nombre (opcional)</label
+            >
             <input
               id="prereg-name"
               v-model="name"
@@ -194,13 +201,16 @@ onBeforeUnmount(() => {
           </div>
 
           <p v-if="submitError" class="text-sm text-brand-ink">
-            <span class="inline-block rounded-full border border-brand-neon/30 bg-brand-neon/10 px-3 py-1 text-xs font-semibold text-brand-neon">Error</span>
+            <span
+              class="inline-block rounded-full border border-brand-neon/30 bg-brand-neon/10 px-3 py-1 text-xs font-semibold text-brand-neon"
+              >Error</span
+            >
             <span class="ml-2 text-brand-ink/70">{{ submitError }}</span>
           </p>
 
           <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p class="text-xs text-brand-ink/60">
-              Enviamos tu email a nuestro servidor para sumarte al test.
+              Enviamos tu email a nuestro servidor para activar tu cuenta.
             </p>
             <button
               type="submit"
