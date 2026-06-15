@@ -129,7 +129,7 @@ onBeforeUnmount(() => {
       ></button>
 
       <section
-        class="relative w-full max-w-xl rounded-3xl border border-brand-neon/20 bg-brand-muted/95 p-6 text-brand-ink shadow-card"
+        class="relative w-full max-w-xl rounded-card border border-brand-neon/20 bg-brand-muted/95 p-6 text-brand-ink shadow-card"
         role="dialog"
         aria-modal="true"
         aria-label="Pre-registro"
@@ -151,7 +151,7 @@ onBeforeUnmount(() => {
           </button>
         </header>
 
-        <div class="mt-6" v-if="submitted">
+        <div v-if="submitted" class="mt-6">
           <div class="rounded-2xl border border-brand-neon/30 bg-brand-neon/10 p-4">
             <p class="text-sm font-semibold text-brand-neon">¡Listo!</p>
             <p class="mt-1 text-sm text-brand-ink/70">
@@ -182,7 +182,7 @@ onBeforeUnmount(() => {
               v-model="name"
               type="text"
               autocomplete="name"
-              class="mt-2 w-full rounded-2xl border border-brand-neon/20 bg-brand-card px-4 py-3 text-sm text-brand-ink placeholder:text-brand-ink/40 outline-none focus:border-brand-neon/50"
+              class="mt-2 w-full rounded-2xl border border-brand-neon/20 bg-brand-card px-4 py-3 text-sm text-brand-ink placeholder:text-brand-ink/40 outline-none focus:border-brand-neon/50 focus-visible:ring-2 focus-visible:ring-brand-neon/30"
               placeholder="Tu nombre"
             />
           </div>
@@ -195,7 +195,7 @@ onBeforeUnmount(() => {
               type="email"
               required
               autocomplete="email"
-              class="mt-2 w-full rounded-2xl border border-brand-neon/20 bg-brand-card px-4 py-3 text-sm text-brand-ink placeholder:text-brand-ink/40 outline-none focus:border-brand-neon/50"
+              class="mt-2 w-full rounded-2xl border border-brand-neon/20 bg-brand-card px-4 py-3 text-sm text-brand-ink placeholder:text-brand-ink/40 outline-none focus:border-brand-neon/50 focus-visible:ring-2 focus-visible:ring-brand-neon/30"
               placeholder="tu@email.com"
             />
           </div>
@@ -215,7 +215,7 @@ onBeforeUnmount(() => {
             <button
               type="submit"
               :disabled="isSubmitting"
-              class="w-full rounded-full bg-brand-neon px-6 py-3 text-sm font-semibold text-brand-night transition hover:bg-brand-neon/80 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+              class="w-full rounded-full bg-brand-neon px-6 py-3 text-sm font-semibold text-brand-night transition hover:-translate-y-0.5 hover:bg-brand-neon-hover disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
             >
               {{ isSubmitting ? 'Enviando…' : 'Enviar pre-registro' }}
             </button>

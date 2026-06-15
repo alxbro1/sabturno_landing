@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
+import LegalPageLayout from '../components/LegalPageLayout.vue'
 
 const html = ref<string>('')
 
@@ -10,5 +11,8 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="prose prose-invert max-w-none" v-html="html" />
+  <LegalPageLayout>
+    <!-- eslint-disable-next-line vue/no-v-html -->
+    <div class="legal-content" v-html="html" />
+  </LegalPageLayout>
 </template>

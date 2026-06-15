@@ -28,8 +28,8 @@ defineProps<{
         :key="testimonial.author"
         class="card-hover rounded-card border border-white/10 bg-white/5 p-5 hover:border-brand-neon/35"
       >
-        <p class="text-base leading-8 text-brand-ink/74">"{{ testimonial.quote }}"</p>
-        <div class="mt-6 border-t border-white/8 pt-4">
+        <p class="text-base leading-8 text-brand-ink/75">"{{ testimonial.quote }}"</p>
+          <div class="mt-6 border-t border-white/10 pt-4">
           <p class="text-sm font-semibold text-brand-ink">{{ testimonial.author }}</p>
           <p class="text-sm text-brand-ink/55">{{ testimonial.role }}</p>
         </div>

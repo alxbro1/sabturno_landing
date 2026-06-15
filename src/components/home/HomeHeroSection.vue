@@ -62,14 +62,14 @@ const metricIcons = [CalendarDaysIcon, CreditCardIcon, BoltIcon]
         </div>
         <div>
           <div
-            class="rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(7,7,7,0.98),rgba(18,18,18,0.92))] p-4"
+            class="rounded-card border border-white/10 bg-[linear-gradient(180deg,rgba(7,7,7,0.98),rgba(18,18,18,0.92))] p-4"
           >
             <div class="flex items-center justify-between text-xs text-brand-ink/50">
               <span>Reserva en 2 minutos</span>
               <span>100% web</span>
             </div>
             <div
-              class="mt-4 rounded-[24px] bg-[linear-gradient(180deg,#6bffb0_0%,#00f068_100%)] p-5 text-brand-night"
+              class="mt-4 rounded-pill bg-[linear-gradient(180deg,#6bffb0_0%,#00f068_100%)] p-5 text-brand-night"
             >
               <p class="text-xs font-semibold uppercase tracking-[0.18em]">Tu proximo turno</p>
               <p class="mt-3 text-xl font-semibold sm:text-2xl">La Barbería</p>
@@ -81,7 +81,7 @@ const metricIcons = [CalendarDaysIcon, CreditCardIcon, BoltIcon]
               <div
                 v-for="snapshot in serviceSnapshots"
                 :key="snapshot.service"
-                class="rounded-2xl border border-white/6 bg-white/5 px-4 py-3"
+                class="rounded-2xl border border-white/5 bg-white/5 px-4 py-3"
               >
                 <div class="flex items-center justify-between text-sm">
                   <p class="font-semibold text-brand-ink">{{ snapshot.service }}</p>

@@ -35,14 +35,14 @@ defineEmits<{
         <div class="mt-6 flex flex-col gap-3 sm:flex-row">
           <button
             type="button"
-            class="rounded-full bg-brand-night px-7 py-4 text-sm font-semibold text-brand-ink transition hover:-translate-y-0.5 hover:bg-black"
+            class="rounded-full bg-brand-night px-7 py-4 text-sm font-semibold text-brand-ink transition hover:-translate-y-0.5 hover:bg-black focus-visible:ring-2 focus-visible:ring-brand-neon/50 focus-visible:outline-none"
             @click="$emit('open-pre-register')"
           >
             Quiero empezar a usarlo
           </button>
           <a
             href="https://sabturno.com/app/"
-            class="rounded-full border border-brand-night/15 bg-white/30 px-7 py-4 text-center text-sm font-semibold text-brand-night transition hover:-translate-y-0.5 hover:bg-white/45"
+            class="rounded-full border border-brand-night/15 bg-white/30 px-7 py-4 text-center text-sm font-semibold text-brand-night transition hover:-translate-y-0.5 hover:bg-white/45 focus-visible:ring-2 focus-visible:ring-brand-neon/50 focus-visible:outline-none"
           >
             Ver la App Web
           </a>

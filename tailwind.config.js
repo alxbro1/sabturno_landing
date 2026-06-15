@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: ['class'],
   content: ['./index.html', './src/**/*.{vue,ts,tsx,js,jsx}'],
   theme: {
     extend: {
@@ -14,6 +15,8 @@ export default {
           card: 'var(--brand-card)',
           border: 'var(--brand-border)',
         },
+        destructive: 'var(--color-destructive)',
+        success: 'var(--color-success)',
       },
       fontFamily: {
         display: ['Space Grotesk', 'sans-serif'],

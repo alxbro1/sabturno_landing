@@ -17,7 +17,7 @@ defineProps<{
         {{ card.eyebrow }}
       </p>
       <h2 class="mt-4 text-2xl font-semibold text-brand-ink">{{ card.title }}</h2>
-      <p class="mt-3 text-base leading-7 text-brand-ink/68">{{ card.description }}</p>
+      <p class="mt-3 text-base leading-7 text-brand-ink/70">{{ card.description }}</p>
     </article>
   </section>
 </template>

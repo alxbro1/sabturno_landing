@@ -17,7 +17,7 @@ defineProps<{
         {{ audience.eyebrow }}
       </p>
       <h2 class="mt-4 max-w-xl text-3xl font-semibold text-brand-ink">{{ audience.title }}</h2>
-      <p class="mt-3 max-w-xl text-base leading-7 text-brand-ink/68">{{ audience.summary }}</p>
+      <p class="mt-3 max-w-xl text-base leading-7 text-brand-ink/70">{{ audience.summary }}</p>
       <ul class="mt-6 space-y-3">
         <li
           v-for="bullet in audience.bullets"

@@ -20,7 +20,7 @@ const webMomentIcons = [CursorArrowRaysIcon, DevicePhoneMobileIcon, WalletIcon]
         <h2 class="max-w-xl text-4xl font-semibold text-brand-ink sm:text-5xl">
           Deja de depender de que el cliente descargue algo para reservar.
         </h2>
-        <p class="max-w-xl text-lg leading-8 text-brand-ink/68">
+        <p class="max-w-xl text-lg leading-8 text-brand-ink/70">
           La app web reduce la friccion justo donde mas duele: ese momento en el que el cliente esta
           listo para sacar turno, pero no quiere instalar una app. Ahora puede entrar directo, ver
           disponibilidad y avanzar sin romper el impulso.

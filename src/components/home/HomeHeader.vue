@@ -18,7 +18,7 @@ const emit = defineEmits<{
   <header class="sticky top-0 z-50">
     <div class="mx-auto max-w-7xl px-4 pt-4 lg:px-6">
       <div
-        class="flex items-center gap-4 rounded-[32px] border border-white/10 bg-[#0a0a0ab8] px-4 py-3 shadow-[0_20px_80px_rgba(0,0,0,0.28)] backdrop-blur-[18px] lg:px-6"
+        class="flex items-center gap-4 rounded-card border border-white/10 bg-[#0a0a0ab8] px-4 py-3 shadow-[0_20px_80px_rgba(0,0,0,0.28)] backdrop-blur-[18px] lg:px-6"
       >
         <a href="#hero" class="flex shrink-0 items-center">
           <img src="/white_logotype.webp" alt="Logo Sabturno" class="h-6 w-auto lg:h-8" />
@@ -40,14 +40,14 @@ const emit = defineEmits<{
         <div class="hidden shrink-0 items-center gap-3 lg:flex">
           <button
             type="button"
-            class="rounded-full border border-brand-neon/20 bg-brand-card px-5 py-2 text-sm font-semibold text-brand-ink transition hover:-translate-y-0.5 hover:border-brand-neon"
+            class="rounded-full border border-brand-neon/20 bg-brand-card px-5 py-2 text-sm font-semibold text-brand-ink transition hover:-translate-y-0.5 hover:border-brand-neon focus-visible:ring-2 focus-visible:ring-brand-neon/50 focus-visible:outline-none"
             @click="emit('open-pre-register')"
           >
             Probar Sabturno
           </button>
           <a
             href="https://appweb.sabturno.com/"
-            class="rounded-full bg-brand-neon px-5 py-2 text-sm font-semibold text-brand-night transition hover:-translate-y-0.5 hover:bg-brand-neon/85"
+            class="rounded-full bg-brand-neon px-5 py-2 text-sm font-semibold text-brand-night transition hover:-translate-y-0.5 hover:bg-brand-neon-hover focus-visible:ring-2 focus-visible:ring-brand-neon/50 focus-visible:outline-none"
           >
             Probar App Web
           </a>
@@ -59,17 +59,26 @@ const emit = defineEmits<{
           aria-label="Abrir menú"
           @click="emit('toggle-mobile-menu')"
         >
-          <span class="space-y-1.5">
-            <span class="block h-0.5 w-5 bg-current"></span>
-            <span class="block h-0.5 w-5 bg-current"></span>
-            <span class="block h-0.5 w-5 bg-current"></span>
+          <span class="relative block h-4 w-5">
+            <span
+              class="absolute left-0 block h-0.5 w-5 bg-current transition-all duration-300"
+              :class="mobileMenuOpen ? 'top-2 rotate-45' : 'top-0 rotate-0'"
+            ></span>
+            <span
+              class="absolute left-0 top-2 block h-0.5 w-5 bg-current transition-all duration-300"
+              :class="mobileMenuOpen ? 'opacity-0' : 'opacity-100'"
+            ></span>
+            <span
+              class="absolute left-0 block h-0.5 w-5 bg-current transition-all duration-300"
+              :class="mobileMenuOpen ? 'top-2 -rotate-45' : 'top-4 rotate-0'"
+            ></span>
           </span>
         </button>
       </div>
 
       <div
         v-if="mobileMenuOpen"
-        class="mt-3 overflow-hidden rounded-[28px] border border-brand-neon/15 bg-brand-card/95 p-4 shadow-card backdrop-blur"
+        class="mt-3 overflow-hidden rounded-card border border-brand-neon/15 bg-brand-card/95 p-4 shadow-card backdrop-blur"
       >
         <div class="flex flex-col gap-3 text-sm font-medium text-brand-ink/80">
           <a
@@ -99,14 +108,14 @@ const emit = defineEmits<{
         <div class="mt-4 grid gap-3 sm:grid-cols-2">
           <button
             type="button"
-            class="rounded-full border border-brand-neon/20 bg-brand-muted px-5 py-3 text-sm font-semibold text-brand-ink"
+            class="rounded-full border border-brand-neon/20 bg-brand-muted px-5 py-3 text-sm font-semibold text-brand-ink transition hover:-translate-y-0.5 hover:border-brand-neon focus-visible:ring-2 focus-visible:ring-brand-neon/50 focus-visible:outline-none"
             @click="emit('open-pre-register')"
           >
             Probar Sabturno
           </button>
           <a
             href="https://appweb.sabturno.com/"
-            class="rounded-full bg-brand-neon px-5 py-3 text-center text-sm font-semibold text-brand-night"
+            class="rounded-full bg-brand-neon px-5 py-3 text-center text-sm font-semibold text-brand-night transition hover:-translate-y-0.5 hover:bg-brand-neon-hover focus-visible:ring-2 focus-visible:ring-brand-neon/50 focus-visible:outline-none"
             @click="emit('close-mobile-menu')"
           >
             Probar App Web
