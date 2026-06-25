@@ -10,6 +10,7 @@ import HomeHeader from '../components/home/HomeHeader.vue'
 import HomeHeroSection from '../components/home/HomeHeroSection.vue'
 import HomeLaunchSection from '../components/home/HomeLaunchSection.vue'
 import HomeStorySection from '../components/home/HomeStorySection.vue'
+import HomePricingSection from '../components/home/HomePricingSection.vue'
 import HomeTestimonialsSection from '../components/home/HomeTestimonialsSection.vue'
 import HomeWebAppSection from '../components/home/HomeWebAppSection.vue'
 import PreRegisterNotice from '../components/home/PreRegisterNotice.vue'
@@ -20,6 +21,7 @@ import type {
   FlowStep,
   HeroMetric,
   NavItem,
+  PricingPlan,
   ServiceSnapshot,
   StoryCard,
   Testimonial,
@@ -30,8 +32,63 @@ const navItems: NavItem[] = [
   { label: 'Propuesta', href: '#proposal' },
   { label: 'App Web', href: '#app-web' },
   { label: 'Experiencia', href: '#experience' },
+  { label: 'Precios', href: '#precios' },
   { label: 'Implementación', href: '#launch' },
   { label: 'Contacto', href: '#contact' },
+]
+
+const pricingPlans: PricingPlan[] = [
+  {
+    id: 'basic',
+    name: 'Básico',
+    description: 'Para empezar a digitalizar tu negocio sin costo.',
+    monthlyPrice: null,
+    yearlyPrice: null,
+    features: [
+      { label: 'Reservas online ilimitadas', plans: { basic: true, pro: true, enterprise: true } },
+      { label: 'Integración MercadoPago', plans: { basic: true, pro: true, enterprise: true } },
+      { label: 'Integración Talo', plans: { basic: true, pro: true, enterprise: true } },
+      { label: 'Pagos en efectivo', plans: { basic: false, pro: 'Hasta 500/mes', enterprise: 'Ilimitado' } },
+      { label: 'Tarjeta de fidelización', plans: { basic: false, pro: false, enterprise: 'Próximamente' } },
+    ],
+    ctaText: 'Empezar gratis',
+    ctaHref: 'https://appweb.sabturno.com/register',
+    recommended: false,
+  },
+  {
+    id: 'pro',
+    name: 'Pro',
+    description: 'Para locales que quieren crecer sin límites.',
+    monthlyPrice: 8000,
+    yearlyPrice: 80000,
+    features: [
+      { label: 'Reservas online ilimitadas', plans: { basic: true, pro: true, enterprise: true } },
+      { label: 'Integración MercadoPago', plans: { basic: true, pro: true, enterprise: true } },
+      { label: 'Integración Talo', plans: { basic: true, pro: true, enterprise: true } },
+      { label: 'Pagos en efectivo', plans: { basic: false, pro: 'Hasta 500/mes', enterprise: 'Ilimitado' } },
+      { label: 'Tarjeta de fidelización', plans: { basic: false, pro: false, enterprise: 'Próximamente' } },
+    ],
+    ctaText: 'Probar Pro 30 días',
+    ctaHref: 'https://appweb.sabturno.com/register',
+    recommended: true,
+  },
+  {
+    id: 'enterprise',
+    name: 'Enterprise',
+    description: 'Para cadenas y negocios con alto volumen.',
+    monthlyPrice: 15000,
+    yearlyPrice: 150000,
+    features: [
+      { label: 'Reservas online ilimitadas', plans: { basic: true, pro: true, enterprise: true } },
+      { label: 'Integración MercadoPago', plans: { basic: true, pro: true, enterprise: true } },
+      { label: 'Integración Talo', plans: { basic: true, pro: true, enterprise: true } },
+      { label: 'Pagos en efectivo', plans: { basic: false, pro: 'Hasta 500/mes', enterprise: 'Ilimitado' } },
+      { label: 'Tarjeta de fidelización', plans: { basic: false, pro: false, enterprise: 'Próximamente' } },
+    ],
+    ctaText: 'Probar Enterprise 30 días',
+    ctaHref: 'https://appweb.sabturno.com/register',
+    recommended: false,
+  },
 ]
 
 const heroMetrics: HeroMetric[] = [
@@ -303,6 +360,7 @@ onMounted(() => {
         <HomeWebAppSection :web-moments="webMoments" />
         <HomeStorySection :story-cards="storyCards" />
         <HomeAudienceSection :audiences="audiences" />
+        <HomePricingSection :plans="pricingPlans" />
         <HomeTestimonialsSection :testimonials="testimonials" />
         <HomeLaunchSection :launch-steps="launchSteps" />
         <HomeCtaSection :cta-highlights="ctaHighlights" @open-pre-register="openPreRegister" />
