@@ -35,3 +35,5 @@
 - No `vue/multi-word-component-names` enforcement — single-word `.vue` filenames are fine
 - Body background is a multi-gradient defined in `style.css`, not Tailwind config
 - Router uses `createWebHistory` (HTML5 history mode, no hash)
+- No consume la API hoy, pero si en el futuro se agrega algún form con
+  fecha/hora, seguir `docs/time-handling.md` (raíz) como contrato.
