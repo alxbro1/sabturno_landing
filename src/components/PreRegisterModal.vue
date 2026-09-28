@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { trackEvent, trackPixelEvent } from '../lib/analytics'
 
 type PreRegisterPayload = {
   name?: string
@@ -73,6 +74,8 @@ async function submit() {
     }
 
     submitted.value = true
+    trackEvent('generate_lead', { method: 'pre_register' })
+    trackPixelEvent('Lead')
     emit('success')
   } catch (err) {
     submitError.value = err instanceof Error ? err.message : 'Error al enviar el formulario.'

@@ -1,10 +1,16 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { trackEvent, trackPixelCustomEvent } from '../../lib/analytics'
 import type { PricingPlan } from './types'
 
 defineProps<{
   plans: PricingPlan[]
 }>()
+
+function handleRegisterClick(plan: PricingPlan): void {
+  trackEvent('sign_up_click', { plan: plan.id, transport_type: 'beacon' })
+  trackPixelCustomEvent('ClickRegister', { plan: plan.id })
+}
 
 const billingCycle = ref<'monthly' | 'yearly'>('monthly')
 
@@ -198,6 +204,7 @@ function getSavings(plan: PricingPlan): string | null {
               ? 'bg-brand-neon text-brand-night hover:bg-brand-neon-hover'
               : 'border border-brand-neon/20 bg-brand-card text-brand-ink hover:border-brand-neon'
           "
+          @click="handleRegisterClick(plan)"
         >
           {{ plan.ctaText }}
         </a>

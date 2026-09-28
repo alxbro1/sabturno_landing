@@ -30,6 +30,33 @@
 - `./deploy.sh` — builds then `scp`s `dist/` to EC2 (`ubuntu@54.210.182.128:/home/ubuntu/web`)
 - Requires local PEM key at `~/Desktop/Credentials/PEM/styleup-key.pem`
 
+## Analytics
+
+GA4 + Meta Pixel are env-gated in `src/lib/analytics.ts`, wired in `src/main.ts`.
+
+- Vars (see `.env.example`): `VITE_GA_MEASUREMENT_ID`, `VITE_META_PIXEL_ID`,
+  `VITE_ANALYTICS_DEBUG` (set to `"true"` to load analytics during `npm run dev`; otherwise
+  dev is skipped entirely to avoid polluting real data).
+- **No IDs → no tags.** If neither `VITE_GA_MEASUREMENT_ID` nor `VITE_META_PIXEL_ID` is set,
+  `initAnalytics` is a full no-op: no script injected, no `window.gtag`/`window.fbq`/`window.dataLayer`.
+- SPA page views fire once per route change via `router.afterEach` (GA `page_view`, Pixel `PageView`),
+  including the initial route (no duplicate).
+- Events:
+
+  | Event | Trigger | Tool | Params |
+  | --- | --- | --- | --- |
+  | `pre_register_open` | Pre-register modal opened | GA | `location` (`header` / `header_mobile` / `cta`) |
+  | `generate_lead` | Pre-register form submit success | GA | `method: 'pre_register'` |
+  | `Lead` | Pre-register form submit success | Pixel | — |
+  | `sign_up_click` | Click on a pricing plan's register CTA | GA | `plan` (plan id) |
+  | `ClickRegister` | Click on a pricing plan's register CTA | Pixel (custom) | `plan` (plan id) |
+  | `open_app_click` | Click on a "Probar/Ver App Web" link | GA | `location` (`header` / `header_mobile` / `cta`) |
+
+  Name/email are never sent to GA or Pixel.
+- **Build-time vars.** Vite bakes `VITE_*` vars into the bundle at build time, not at runtime.
+  `./deploy.sh` builds must have the real IDs in `.env.production` or the shell environment
+  before running `npm run build` / `./deploy.sh`, or the deployed bundle ships without analytics.
+
 ## Gotchas
 - Build runs `vue-tsc` before `vite build`; type errors block production builds
 - No `vue/multi-word-component-names` enforcement — single-word `.vue` filenames are fine

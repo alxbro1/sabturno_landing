@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
+import { trackEvent } from '../../lib/analytics'
 import type { NavItem } from './types'
 
 defineProps<{
@@ -8,10 +9,14 @@ defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'open-pre-register'): void
+  (e: 'open-pre-register', location: string): void
   (e: 'close-mobile-menu'): void
   (e: 'toggle-mobile-menu'): void
 }>()
+
+function handleOpenAppClick(location: string): void {
+  trackEvent('open_app_click', { location, transport_type: 'beacon' })
+}
 </script>
 
 <template>
@@ -41,13 +46,14 @@ const emit = defineEmits<{
           <button
             type="button"
             class="rounded-full border border-brand-neon/20 bg-brand-card px-5 py-2 text-sm font-semibold text-brand-ink transition hover:-translate-y-0.5 hover:border-brand-neon focus-visible:ring-2 focus-visible:ring-brand-neon/50 focus-visible:outline-none"
-            @click="emit('open-pre-register')"
+            @click="emit('open-pre-register', 'header')"
           >
             Probar Sabturno
           </button>
           <a
             href="https://appweb.sabturno.com/"
             class="rounded-full bg-brand-neon px-5 py-2 text-sm font-semibold text-brand-night transition hover:-translate-y-0.5 hover:bg-brand-neon-hover focus-visible:ring-2 focus-visible:ring-brand-neon/50 focus-visible:outline-none"
+            @click="handleOpenAppClick('header')"
           >
             Probar App Web
           </a>
@@ -109,14 +115,14 @@ const emit = defineEmits<{
           <button
             type="button"
             class="rounded-full border border-brand-neon/20 bg-brand-muted px-5 py-3 text-sm font-semibold text-brand-ink transition hover:-translate-y-0.5 hover:border-brand-neon focus-visible:ring-2 focus-visible:ring-brand-neon/50 focus-visible:outline-none"
-            @click="emit('open-pre-register')"
+            @click="emit('open-pre-register', 'header_mobile')"
           >
             Probar Sabturno
           </button>
           <a
             href="https://appweb.sabturno.com/"
             class="rounded-full bg-brand-neon px-5 py-3 text-center text-sm font-semibold text-brand-night transition hover:-translate-y-0.5 hover:bg-brand-neon-hover focus-visible:ring-2 focus-visible:ring-brand-neon/50 focus-visible:outline-none"
-            @click="emit('close-mobile-menu')"
+            @click="handleOpenAppClick('header_mobile'); emit('close-mobile-menu')"
           >
             Probar App Web
           </a>

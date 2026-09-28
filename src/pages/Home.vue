@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
+import { trackEvent } from '../lib/analytics'
 import PasswordReset from '../components/PasswordReset.vue'
 import PreRegisterModal from '../components/PreRegisterModal.vue'
 import HomeAudienceSection from '../components/home/HomeAudienceSection.vue'
@@ -287,9 +288,10 @@ function handleResetSuccess() {
   alert('Contraseña reseteada (simulado)')
 }
 
-function openPreRegister() {
+function openPreRegister(location?: string) {
   mobileMenuOpen.value = false
   isPreRegisterOpen.value = true
+  trackEvent('pre_register_open', location ? { location } : undefined)
 }
 
 function handlePreRegisterSuccess() {
