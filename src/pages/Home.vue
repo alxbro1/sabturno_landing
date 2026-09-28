@@ -94,10 +94,10 @@ const pricingPlans: PricingPlan[] = [
 
 const heroMetrics: HeroMetric[] = [
   {
-    value: '100% gratis',
-    label: 'Para locales y clientes',
+    value: 'Empezá gratis',
+    label: 'Pagá solo cuando crezcas',
     detail:
-      'Sin costo de suscripción ni cobro al cliente. La app es gratuita para todos los que la usan.',
+      'El plan Básico no tiene costo y tus clientes reservan sin pagar nada extra. Pro y Enterprise, cuando los necesites.',
   },
   {
     value: '+61%',
