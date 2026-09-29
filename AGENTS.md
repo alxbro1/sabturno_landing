@@ -27,8 +27,10 @@
 - `tailwind.config.js` — custom `brand` colors, `glow`/`card` shadows, `float` animation
 
 ## Deploy
-- `./deploy.sh` — builds then `scp`s `dist/` to EC2 (`ubuntu@54.210.182.128:/home/ubuntu/web`)
-- Requires local PEM key at `~/Desktop/Credentials/PEM/styleup-key.pem`
+- `./deploy.sh` — builds, zips `dist/` and publishes it as a manual deployment to Amplify
+  (app `d3tlsyf8fyzqva`, branch `staging`, serves `sabturno.com` + `www`). Waits for the job result.
+- Requires the AWS CLI profile `sabturno`. The Amplify app is not git-connected: pushing does not deploy.
+- The SPA rewrite (`/<*>` → `/index.html`, 404-200) lives in the Amplify app's rewrite rules, not in the repo.
 
 ## Analytics
 

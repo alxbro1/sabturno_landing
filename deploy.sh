@@ -1,18 +1,27 @@
 #!/bin/bash
-set -e
+set -euo pipefail
 
-GREEN='\033[0;32m'
-NC='\033[0m'
-
-SERVER="ubuntu@54.210.182.128"
-KEY="/Users/alexandersauro/Desktop/Credentials/PEM/styleup-key.pem"
-REMOTE_PATH="/home/ubuntu/web"
-LOCAL_DIST="./dist"
+export AWS_PROFILE=sabturno AWS_REGION=us-east-1
+APP_ID=d3tlsyf8fyzqva
+BRANCH=staging
+TMP=$(mktemp -d)
+ZIP="$TMP/dist.zip"
+trap 'rm -rf "$TMP"' EXIT
 
 npm run build
+(cd dist && zip -qr "$ZIP" .)
 
-# sudo ssh -i "$KEY" "$SERVER" "sudo chown -R ubuntu:ubuntu $REMOTE_PATH"
+read -r JOB_ID URL < <(aws amplify create-deployment --app-id "$APP_ID" --branch-name "$BRANCH" \
+  --query '[jobId, zipUploadUrl]' --output text)
+curl -fsS -X PUT -H 'Content-Type: application/zip' --upload-file "$ZIP" "$URL"
+aws amplify start-deployment --app-id "$APP_ID" --branch-name "$BRANCH" --job-id "$JOB_ID" >/dev/null
 
-sudo scp -i "$KEY" -r "$LOCAL_DIST"/* "$SERVER:$REMOTE_PATH/"
-
-# sudo ssh -i "$KEY" "$SERVER" "sudo chown -R www-data:www-data $REMOTE_PATH && sudo chmod -R 755 $REMOTE_PATH"
+while :; do
+  STATUS=$(aws amplify get-job --app-id "$APP_ID" --branch-name "$BRANCH" --job-id "$JOB_ID" \
+    --query 'job.summary.status' --output text)
+  case "$STATUS" in
+    SUCCEED) echo "Deploy $JOB_ID OK: https://www.sabturno.com"; break ;;
+    FAILED|CANCELLED) echo "Deploy $JOB_ID terminó en $STATUS" >&2; exit 1 ;;
+    *) sleep 5 ;;
+  esac
+done
