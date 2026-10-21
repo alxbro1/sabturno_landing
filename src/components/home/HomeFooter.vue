@@ -24,6 +24,14 @@ import { RouterLink } from 'vue-router'
         >
           Politica de privacidad
         </RouterLink>
+        <a
+          href="https://anomalstudio.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="underline underline-offset-4 transition hover:text-brand-neon"
+        >
+          Powered by <span class="font-semibold tracking-wide">ANØMAL</span>
+        </a>
       </div>
     </div>
   </footer>
