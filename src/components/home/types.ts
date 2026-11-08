@@ -57,19 +57,7 @@ export type ServiceSnapshot = {
   client: string
 }
 
-export type PricingFeature = {
-  label: string
-  plans: Record<'basic' | 'pro' | 'enterprise', boolean | string>
-}
-
-export type PricingPlan = {
-  id: 'basic' | 'pro' | 'enterprise'
-  name: string
+export type IncludedFeature = {
+  title: string
   description: string
-  monthlyPrice: number | null
-  yearlyPrice: number | null
-  features: PricingFeature[]
-  ctaText: string
-  ctaHref: string
-  recommended: boolean
 }

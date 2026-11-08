@@ -21,8 +21,8 @@ import type {
   FaqItem,
   FlowStep,
   HeroMetric,
+  IncludedFeature,
   NavItem,
-  PricingPlan,
   ServiceSnapshot,
   StoryCard,
   Testimonial,
@@ -33,71 +33,39 @@ const navItems: NavItem[] = [
   { label: 'Propuesta', href: '#proposal' },
   { label: 'App Web', href: '#app-web' },
   { label: 'Experiencia', href: '#experience' },
-  { label: 'Precios', href: '#precios' },
   { label: 'Implementación', href: '#launch' },
   { label: 'Contacto', href: '#contact' },
 ]
 
-const pricingPlans: PricingPlan[] = [
+const includedFeatures: IncludedFeature[] = [
   {
-    id: 'basic',
-    name: 'Básico',
-    description: 'Para empezar a digitalizar tu negocio sin costo.',
-    monthlyPrice: null,
-    yearlyPrice: null,
-    features: [
-      { label: 'Reservas online ilimitadas', plans: { basic: true, pro: true, enterprise: true } },
-      { label: 'Integración MercadoPago', plans: { basic: true, pro: true, enterprise: true } },
-      { label: 'Integración Talo', plans: { basic: true, pro: true, enterprise: true } },
-      { label: 'Pagos en efectivo', plans: { basic: false, pro: 'Hasta 500/mes', enterprise: 'Ilimitado' } },
-      { label: 'Tarjeta de fidelización', plans: { basic: false, pro: false, enterprise: true } },
-    ],
-    ctaText: 'Empezar gratis',
-    ctaHref: 'https://appweb.sabturno.com/register',
-    recommended: false,
+    title: 'Reservas online ilimitadas',
+    description: 'Tus clientes reservan 24/7 desde el navegador sin límite mensual de turnos.',
   },
   {
-    id: 'pro',
-    name: 'Pro',
-    description: 'Para locales que quieren crecer sin límites.',
-    monthlyPrice: 8000,
-    yearlyPrice: 80000,
-    features: [
-      { label: 'Reservas online ilimitadas', plans: { basic: true, pro: true, enterprise: true } },
-      { label: 'Integración MercadoPago', plans: { basic: true, pro: true, enterprise: true } },
-      { label: 'Integración Talo', plans: { basic: true, pro: true, enterprise: true } },
-      { label: 'Pagos en efectivo', plans: { basic: false, pro: 'Hasta 500/mes', enterprise: 'Ilimitado' } },
-      { label: 'Tarjeta de fidelización', plans: { basic: false, pro: false, enterprise: true } },
-    ],
-    ctaText: 'Probar Pro 30 días',
-    ctaHref: 'https://appweb.sabturno.com/register',
-    recommended: true,
+    title: 'Integración MercadoPago',
+    description: 'Cobrá señas o turnos completos de forma automática al momento de reservar.',
   },
   {
-    id: 'enterprise',
-    name: 'Enterprise',
-    description: 'Para cadenas y negocios con alto volumen.',
-    monthlyPrice: 15000,
-    yearlyPrice: 150000,
-    features: [
-      { label: 'Reservas online ilimitadas', plans: { basic: true, pro: true, enterprise: true } },
-      { label: 'Integración MercadoPago', plans: { basic: true, pro: true, enterprise: true } },
-      { label: 'Integración Talo', plans: { basic: true, pro: true, enterprise: true } },
-      { label: 'Pagos en efectivo', plans: { basic: false, pro: 'Hasta 500/mes', enterprise: 'Ilimitado' } },
-      { label: 'Tarjeta de fidelización', plans: { basic: false, pro: false, enterprise: true } },
-    ],
-    ctaText: 'Probar Enterprise 30 días',
-    ctaHref: 'https://appweb.sabturno.com/register',
-    recommended: false,
+    title: 'Integración Talo',
+    description: 'Recibí transferencias directas conciliadas automáticamente con tu agenda.',
+  },
+  {
+    title: 'Pagos en efectivo ilimitados',
+    description: 'Permití abonar en el local sin topes mensuales ni restricciones de volumen.',
+  },
+  {
+    title: 'Tarjeta de fidelización',
+    description: 'Premiá las visitas frecuentes de tus clientes con beneficios automáticos.',
   },
 ]
 
 const heroMetrics: HeroMetric[] = [
   {
-    value: 'Empezá gratis',
-    label: 'Pagá solo cuando crezcas',
+    value: '100% gratis',
+    label: 'Gratis para siempre, sin costos ocultos',
     detail:
-      'El plan Básico no tiene costo y tus clientes reservan sin pagar nada extra. Pro y Enterprise, cuando los necesites.',
+      'Todas las funciones están incluidas desde el primer día. Sin planes pagos ni sorpresas para tu local ni para tus clientes.',
   },
   {
     value: '+61%',
@@ -316,7 +284,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="relative isolate overflow-clip bg-brand-night text-brand-ink">
+  <div class="relative isolate overflow-x-clip bg-brand-night text-brand-ink">
     <div
       class="pointer-events-none absolute -left-40 -top-24 -z-20 h-[32rem] w-[32rem] rounded-full opacity-35 blur-[80px] [background:radial-gradient(circle,rgba(0,240,104,0.85)_0%,rgba(0,240,104,0)_70%)]"
     ></div>
@@ -343,32 +311,33 @@ onMounted(() => {
       @toggle-mobile-menu="mobileMenuOpen = !mobileMenuOpen"
     />
 
-    <main class="mx-auto max-w-7xl px-4 pb-24 pt-8 lg:px-6">
-      <div v-if="activeTab === 'reset'" class="mx-auto max-w-3xl py-12">
-        <PasswordReset
-          :password-reset-token="tokenInput || sampleToken"
-          :password-reset-token-expires="tokenExpiresInput || sampleExpires"
-          @success="handleResetSuccess"
-        />
-      </div>
+    <div v-if="activeTab === 'reset'" class="mx-auto max-w-3xl px-4 py-12">
+      <PasswordReset
+        :password-reset-token="tokenInput || sampleToken"
+        :password-reset-token-expires="tokenExpiresInput || sampleExpires"
+        @success="handleResetSuccess"
+      />
+    </div>
 
-      <template v-else>
-        <HomeHeroSection
-          :hero-highlights="heroHighlights"
-          :hero-metrics="heroMetrics"
-          :service-snapshots="serviceSnapshots"
-          @open-pre-register="openPreRegister"
-        />
+    <template v-else>
+      <HomeHeroSection
+        :hero-highlights="heroHighlights"
+        :hero-metrics="heroMetrics"
+        :service-snapshots="serviceSnapshots"
+        @open-pre-register="openPreRegister"
+      />
+
+      <main class="mx-auto max-w-7xl px-4 pb-24 pt-16 lg:px-6">
         <HomeWebAppSection :web-moments="webMoments" />
         <HomeStorySection :story-cards="storyCards" />
         <HomeAudienceSection :audiences="audiences" />
-        <HomePricingSection :plans="pricingPlans" />
+        <HomePricingSection :features="includedFeatures" />
         <HomeTestimonialsSection :testimonials="testimonials" />
         <HomeLaunchSection :launch-steps="launchSteps" />
         <HomeCtaSection :cta-highlights="ctaHighlights" @open-pre-register="openPreRegister" />
         <HomeFaqSection :faq-items="faqItems" />
-      </template>
-    </main>
+      </main>
+    </template>
 
     <HomeFooter />
   </div>

@@ -21,9 +21,9 @@ function handleOpenAppClick(location: string): void {
 
 <template>
   <header class="sticky top-0 z-50">
-    <div class="mx-auto max-w-7xl px-4 pt-4 lg:px-6">
+    <div class="">
       <div
-        class="flex items-center gap-4 rounded-card border border-white/10 bg-[#0a0a0ab8] px-4 py-3 shadow-[0_20px_80px_rgba(0,0,0,0.28)] backdrop-blur-[18px] lg:px-6"
+        class="flex items-center gap-4 border border-white/10 bg-[#0a0a0ab8] px-4 py-3 shadow-[0_20px_80px_rgba(0,0,0,0.28)] backdrop-blur-[18px] lg:px-6"
       >
         <a href="#hero" class="flex shrink-0 items-center">
           <img src="/white_logotype.webp" alt="Logo Sabturno" class="h-6 w-auto lg:h-8" />
