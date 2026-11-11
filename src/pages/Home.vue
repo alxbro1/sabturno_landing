@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
+import {
+  BoltIcon,
+  CalendarDaysIcon,
+  CreditCardIcon,
+} from '@heroicons/vue/24/outline'
 import { trackEvent } from '../lib/analytics'
 import PasswordReset from '../components/PasswordReset.vue'
 import PreRegisterModal from '../components/PreRegisterModal.vue'
@@ -10,9 +15,9 @@ import HomeFooter from '../components/home/HomeFooter.vue'
 import HomeHeader from '../components/home/HomeHeader.vue'
 import HomeHeroSection from '../components/home/HomeHeroSection.vue'
 import HomeLaunchSection from '../components/home/HomeLaunchSection.vue'
-import HomeStorySection from '../components/home/HomeStorySection.vue'
 import HomePricingSection from '../components/home/HomePricingSection.vue'
 import HomeTestimonialsSection from '../components/home/HomeTestimonialsSection.vue'
+import HomeTickerBand from '../components/home/HomeTickerBand.vue'
 import HomeWebAppSection from '../components/home/HomeWebAppSection.vue'
 import PreRegisterNotice from '../components/home/PreRegisterNotice.vue'
 import type {
@@ -24,13 +29,12 @@ import type {
   IncludedFeature,
   NavItem,
   ServiceSnapshot,
-  StoryCard,
   Testimonial,
   WebMoment,
 } from '../components/home/types'
 
 const navItems: NavItem[] = [
-  { label: 'Propuesta', href: '#proposal' },
+  { label: 'Propuesta', href: '#app-web' },
   { label: 'App Web', href: '#app-web' },
   { label: 'Experiencia', href: '#experience' },
   { label: 'Implementación', href: '#launch' },
@@ -80,31 +84,12 @@ const heroMetrics: HeroMetric[] = [
   },
 ]
 
+const metricIcons = [CalendarDaysIcon, CreditCardIcon, BoltIcon]
+
 const heroHighlights = [
   'Ideal para barberías, peluquerías y centros de estética',
   'Clientes reservando sin llamadas ni WhatsApps infinitos',
   'Diseño pensado para convertir visitas en turnos confirmados',
-]
-
-const storyCards: StoryCard[] = [
-  {
-    eyebrow: 'Sin descargas obligatorias',
-    title: 'Más personas terminan la reserva',
-    description:
-      'Cuando el acceso es directo desde el navegador, la intención se convierte más rápido en turno confirmado.',
-  },
-  {
-    eyebrow: 'Branding para tu local',
-    title: 'Una experiencia más profesional',
-    description:
-      'Tu negocio deja de depender de mensajes improvisados y pasa a ofrecer una experiencia moderna y ordenada.',
-  },
-  {
-    eyebrow: 'Operación centralizada',
-    title: 'El equipo trabaja con claridad',
-    description:
-      'Todo se organiza desde el mismo sistema: horarios, servicios, disponibilidad y confirmaciones.',
-  },
 ]
 
 const audiences: AudienceCard[] = [
@@ -327,15 +312,40 @@ onMounted(() => {
         @open-pre-register="openPreRegister"
       />
 
-      <main class="mx-auto max-w-7xl px-4 pb-24 pt-16 lg:px-6">
+      <!-- Infinite Fluid Ticker Band across 100vw immediately below hero -->
+      <HomeTickerBand />
+
+      <!-- Full-Width Fluid Main Container -->
+      <main class="flex w-full flex-col overflow-hidden pb-24">
+        <!-- Mobile-Only Metrics Stream -->
+        <div class="mx-auto w-full max-w-7xl px-4 pt-6 pb-2 sm:hidden">
+          <div class="grid grid-cols-1 gap-3">
+            <article
+              v-for="(metric, index) in heroMetrics"
+              :key="metric.label"
+              class="rounded-2xl border border-white/15 bg-black/75 p-4 shadow-lg backdrop-blur-md"
+            >
+              <div class="flex items-center gap-2.5">
+                <component
+                  :is="metricIcons[index % metricIcons.length]"
+                  class="h-5 w-5 text-brand-neon"
+                  aria-hidden="true"
+                />
+                <p class="text-xl font-bold text-brand-neon">{{ metric.value }}</p>
+              </div>
+              <p class="mt-1 text-xs font-semibold text-brand-ink">{{ metric.label }}</p>
+              <p class="mt-0.5 text-xs text-brand-ink/70">{{ metric.detail }}</p>
+            </article>
+          </div>
+        </div>
+
         <HomeWebAppSection :web-moments="webMoments" />
-        <HomeStorySection :story-cards="storyCards" />
         <HomeAudienceSection :audiences="audiences" />
+        <HomeLaunchSection :launch-steps="launchSteps" />
         <HomePricingSection :features="includedFeatures" />
         <HomeTestimonialsSection :testimonials="testimonials" />
-        <HomeLaunchSection :launch-steps="launchSteps" />
-        <HomeCtaSection :cta-highlights="ctaHighlights" @open-pre-register="openPreRegister" />
         <HomeFaqSection :faq-items="faqItems" />
+        <HomeCtaSection :cta-highlights="ctaHighlights" @open-pre-register="openPreRegister" />
       </main>
     </template>
 

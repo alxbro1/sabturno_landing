@@ -1,12 +1,18 @@
 <script setup lang="ts">
+import {
+  CheckBadgeIcon,
+  DevicePhoneMobileIcon,
+  ShieldCheckIcon,
+  SparklesIcon,
+} from '@heroicons/vue/24/outline'
 import { trackEvent } from '../../lib/analytics'
 import type { CtaHighlight } from './types'
 
 defineProps<{
-  ctaHighlights: CtaHighlight[]
+  ctaHighlights?: CtaHighlight[]
 }>()
 
-defineEmits<{
+const emit = defineEmits<{
   (e: 'open-pre-register', location: string): void
 }>()
 
@@ -16,54 +22,74 @@ function handleOpenAppClick(): void {
 </script>
 
 <template>
-  <section
-    id="contact"
-    class="mt-8 rounded-panel bg-[linear-gradient(135deg,rgba(0,240,104,1)_0%,rgba(122,255,185,0.92)_52%,rgba(240,255,245,0.84)_100%)] p-6 shadow-[0_28px_90px_rgba(0,240,104,0.22)] lg:p-8"
-  >
-    <div class="grid gap-10 lg:grid-cols-[1.1fr,0.9fr] lg:items-center">
-      <div>
-        <p
-          class="inline-flex items-center gap-2 rounded-full border border-brand-night/20 bg-brand-night/15 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-brand-night"
-        >
-          Reservá sin fricción desde el primer día
-        </p>
-        <h2
-          class="mt-5 max-w-3xl text-4xl font-semibold leading-tight text-brand-night sm:text-5xl"
-        >
-          Si tu negocio ya necesita vender mejor desde el primer click, esta version de Sabturno va
-          en la direccion correcta.
-        </h2>
-        <p class="mt-4 max-w-2xl text-lg leading-8 text-brand-night">
-          Sumate a la prueba cerrada y mostra una forma mas moderna de reservar. Menos friccion para
-          el cliente. Mas claridad para tu equipo.
-        </p>
-        <div class="mt-6 flex flex-col gap-3 sm:flex-row">
-          <button
-            type="button"
-            class="rounded-full bg-brand-night px-7 py-4 text-sm font-semibold text-brand-ink transition hover:-translate-y-0.5 hover:bg-black focus-visible:ring-2 focus-visible:ring-brand-neon/50 focus-visible:outline-none"
-            @click="$emit('open-pre-register', 'cta')"
-          >
-            Quiero empezar a usarlo
-          </button>
-          <a
-            href="https://sabturno.com/app/"
-            class="rounded-full border border-brand-night/15 bg-white/30 px-7 py-4 text-center text-sm font-semibold text-brand-night transition hover:-translate-y-0.5 hover:bg-white/45 focus-visible:ring-2 focus-visible:ring-brand-neon/50 focus-visible:outline-none"
-            @click="handleOpenAppClick"
-          >
-            Ver la App Web
-          </a>
-        </div>
-      </div>
+  <section id="contact" class="relative w-full py-16 lg:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <!-- Cinematic Banner Wrapper -->
+      <div
+        class="relative overflow-hidden rounded-[40px] border border-brand-neon/40 bg-gradient-to-b from-[#141b16] via-[#0c120e] to-[#080808] p-8 shadow-[0_25px_90px_rgba(0,240,104,0.18)] sm:p-12 lg:p-16"
+      >
+        <!-- Background Neon Glows and Grid -->
+        <div
+          class="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-brand-neon/20 blur-[120px]"
+        ></div>
+        <div
+          class="pointer-events-none absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-brand-neon/15 blur-[120px]"
+        ></div>
+        <div
+          class="pointer-events-none absolute inset-0 opacity-15 [background-image:linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:48px_48px]"
+        ></div>
 
-      <div class="rounded-card border border-brand-night/15 bg-white/30 p-6 backdrop-blur-sm">
-        <div class="space-y-4">
-          <div
-            v-for="highlight in ctaHighlights"
-            :key="highlight.title"
-            class="rounded-pill border border-brand-night/15 bg-white/55 px-5 py-4"
+        <!-- Banner Content -->
+        <div class="relative z-10 mx-auto max-w-3xl text-center">
+          <span
+            class="inline-flex items-center gap-2 rounded-full border border-brand-neon/40 bg-brand-neon/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.22em] text-brand-neon"
           >
-            <p class="text-sm font-semibold text-brand-night">{{ highlight.title }}</p>
-            <p class="mt-1 text-sm leading-6 text-brand-night">{{ highlight.detail }}</p>
+            <SparklesIcon class="h-4 w-4" />
+            <span>Reservas Online Sin Fricción</span>
+          </span>
+
+          <h2 class="mt-6 text-3xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Llevá tu negocio al próximo nivel.
+          </h2>
+
+          <p class="mt-4 text-base leading-relaxed text-white/80 sm:text-xl">
+            Agenda llena, cero mensajes manuales y cobro de señas automático desde hoy mismo.
+          </p>
+
+          <!-- Trust Badges Row -->
+          <div class="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs font-semibold text-white/80">
+            <div class="flex items-center gap-1.5">
+              <CheckBadgeIcon class="h-4 w-4 text-brand-neon" />
+              <span>100% Gratis sin costos ocultos</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <ShieldCheckIcon class="h-4 w-4 text-brand-neon" />
+              <span>Sin tarjeta de crédito requerida</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <SparklesIcon class="h-4 w-4 text-brand-neon" />
+              <span>Listo en 3 minutos</span>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <button
+              type="button"
+              class="w-full rounded-full bg-brand-neon px-9 py-4 text-center text-base font-bold text-brand-night shadow-neon transition duration-200 hover:-translate-y-0.5 hover:bg-brand-neon-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-neon sm:w-auto"
+              @click="emit('open-pre-register', 'cta')"
+            >
+              Quiero Empezar a Usarlo
+            </button>
+
+            <a
+              href="https://sabturno.com/app/"
+              class="flex w-full items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-4 text-center text-base font-semibold text-white backdrop-blur-md transition duration-200 hover:-translate-y-0.5 hover:border-white/40 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 sm:w-auto"
+              @click="handleOpenAppClick"
+            >
+              <DevicePhoneMobileIcon class="h-5 w-5 text-brand-neon" />
+              <span>Ver App Web en Vivo</span>
+            </a>
           </div>
         </div>
       </div>
